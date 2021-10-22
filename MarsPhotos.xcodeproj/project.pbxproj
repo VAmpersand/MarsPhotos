@@ -13,7 +13,7 @@
 		775668BA2722D1C5009EBD42 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 775668B92722D1C5009EBD42 /* Preview Assets.xcassets */; };
 		775668C32722D4B3009EBD42 /* AlbomSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668C22722D4B3009EBD42 /* AlbomSelectionView.swift */; };
 		775668C82722D4E5009EBD42 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668C72722D4E5009EBD42 /* APIService.swift */; };
-		775668CB2722D9BA009EBD42 /* RoverPhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668CA2722D9BA009EBD42 /* RoverPhotoResponse.swift */; };
+		775668CB2722D9BA009EBD42 /* RoverPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668CA2722D9BA009EBD42 /* RoverPhotos.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +24,7 @@
 		775668B92722D1C5009EBD42 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		775668C22722D4B3009EBD42 /* AlbomSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbomSelectionView.swift; sourceTree = "<group>"; };
 		775668C72722D4E5009EBD42 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
-		775668CA2722D9BA009EBD42 /* RoverPhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverPhotoResponse.swift; sourceTree = "<group>"; };
+		775668CA2722D9BA009EBD42 /* RoverPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverPhotos.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +111,7 @@
 		775668C92722D980009EBD42 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				775668CA2722D9BA009EBD42 /* RoverPhotoResponse.swift */,
+				775668CA2722D9BA009EBD42 /* RoverPhotos.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -189,7 +189,7 @@
 				775668B52722D1C2009EBD42 /* ContentView.swift in Sources */,
 				775668B32722D1C2009EBD42 /* MarsPhotosApp.swift in Sources */,
 				775668C82722D4E5009EBD42 /* APIService.swift in Sources */,
-				775668CB2722D9BA009EBD42 /* RoverPhotoResponse.swift in Sources */,
+				775668CB2722D9BA009EBD42 /* RoverPhotos.swift in Sources */,
 				775668C32722D4B3009EBD42 /* AlbomSelectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

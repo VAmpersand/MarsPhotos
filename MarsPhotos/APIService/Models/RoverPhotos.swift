@@ -1,11 +1,15 @@
 //
-//  RoverPhotoResponse.swift
+//  RoverPhotos.swift
 //  MarsPhotos
 //
 //  Created by Viktor Prokolota on 22.10.2021.
 //
 
 import Foundation
+
+enum Response {
+    
+}
 
 struct RoverPhotos: Codable {
     let id: Int

@@ -25,5 +25,10 @@ class APIService {
         return "https://api.nasa.gov/mars-photos/api/v1/rovers/\(name.rawValue)/photos?earth_date=\(dateStr)&api_key=\(apiKey)"
     }
     
-    func fetchPhotoFrom(rover name: RoverName, for date: Date) -> AnyPublisher<Date,Never>
+    func fetchPhotoFrom(rover name: RoverName, for date: Date) -> AnyPublisher<RoverPhotos, Never> {
+        let urlStr = getUrlFrom(rover: name, for: date)
+        guard let url = URL(string: urlStr) else {
+            return Just(.error).eraseToAnyPublisher()
+        }
+    }
 }
