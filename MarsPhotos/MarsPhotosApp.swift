@@ -11,7 +11,7 @@ import SwiftUI
 struct MarsPhotosApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RoverSelectionView()
         }
     }
 }

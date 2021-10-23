@@ -8,23 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		775668B32722D1C2009EBD42 /* MarsPhotosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668B22722D1C2009EBD42 /* MarsPhotosApp.swift */; };
-		775668B52722D1C2009EBD42 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668B42722D1C2009EBD42 /* ContentView.swift */; };
 		775668B72722D1C5009EBD42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 775668B62722D1C5009EBD42 /* Assets.xcassets */; };
 		775668BA2722D1C5009EBD42 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 775668B92722D1C5009EBD42 /* Preview Assets.xcassets */; };
-		775668C32722D4B3009EBD42 /* AlbomSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668C22722D4B3009EBD42 /* AlbomSelectionView.swift */; };
+		775668C32722D4B3009EBD42 /* RoverSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668C22722D4B3009EBD42 /* RoverSelectionView.swift */; };
 		775668C82722D4E5009EBD42 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668C72722D4E5009EBD42 /* APIService.swift */; };
 		775668CB2722D9BA009EBD42 /* RoverPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668CA2722D9BA009EBD42 /* RoverPhotos.swift */; };
+		775668CE27242893009EBD42 /* APIServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668CD27242893009EBD42 /* APIServiceError.swift */; };
+		775668D127242AEA009EBD42 /* RoverSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668D027242AEA009EBD42 /* RoverSelectionViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		775668AF2722D1C1009EBD42 /* MarsPhotos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarsPhotos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		775668B22722D1C2009EBD42 /* MarsPhotosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsPhotosApp.swift; sourceTree = "<group>"; };
-		775668B42722D1C2009EBD42 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		775668B62722D1C5009EBD42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		775668B92722D1C5009EBD42 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		775668C22722D4B3009EBD42 /* AlbomSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbomSelectionView.swift; sourceTree = "<group>"; };
+		775668C22722D4B3009EBD42 /* RoverSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverSelectionView.swift; sourceTree = "<group>"; };
 		775668C72722D4E5009EBD42 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		775668CA2722D9BA009EBD42 /* RoverPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverPhotos.swift; sourceTree = "<group>"; };
+		775668CD27242893009EBD42 /* APIServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceError.swift; sourceTree = "<group>"; };
+		775668D027242AEA009EBD42 /* RoverSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverSelectionViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,7 +43,6 @@
 		775668A62722D1C1009EBD42 = {
 			isa = PBXGroup;
 			children = (
-				775668C02722D20C009EBD42 /* SupportingFiles */,
 				775668B12722D1C2009EBD42 /* MarsPhotos */,
 				775668B02722D1C1009EBD42 /* Products */,
 			);
@@ -58,10 +59,10 @@
 		775668B12722D1C2009EBD42 /* MarsPhotos */ = {
 			isa = PBXGroup;
 			children = (
+				775668C02722D20C009EBD42 /* SupportingFiles */,
 				775668C52722D4CA009EBD42 /* APIService */,
-				775668C12722D459009EBD42 /* AlbomSelectionView */,
+				775668C12722D459009EBD42 /* RoverSelectionView */,
 				775668B22722D1C2009EBD42 /* MarsPhotosApp.swift */,
-				775668B42722D1C2009EBD42 /* ContentView.swift */,
 			);
 			path = MarsPhotos;
 			sourceTree = "<group>";
@@ -83,18 +84,19 @@
 			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
-		775668C12722D459009EBD42 /* AlbomSelectionView */ = {
+		775668C12722D459009EBD42 /* RoverSelectionView */ = {
 			isa = PBXGroup;
 			children = (
 				775668C42722D4B8009EBD42 /* ViewModel */,
-				775668C22722D4B3009EBD42 /* AlbomSelectionView.swift */,
+				775668C22722D4B3009EBD42 /* RoverSelectionView.swift */,
 			);
-			path = AlbomSelectionView;
+			path = RoverSelectionView;
 			sourceTree = "<group>";
 		};
 		775668C42722D4B8009EBD42 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				775668D027242AEA009EBD42 /* RoverSelectionViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -104,6 +106,7 @@
 			children = (
 				775668C92722D980009EBD42 /* Models */,
 				775668C72722D4E5009EBD42 /* APIService.swift */,
+				775668CD27242893009EBD42 /* APIServiceError.swift */,
 			);
 			path = APIService;
 			sourceTree = "<group>";
@@ -186,11 +189,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				775668B52722D1C2009EBD42 /* ContentView.swift in Sources */,
+				775668CE27242893009EBD42 /* APIServiceError.swift in Sources */,
+				775668D127242AEA009EBD42 /* RoverSelectionViewModel.swift in Sources */,
 				775668B32722D1C2009EBD42 /* MarsPhotosApp.swift in Sources */,
 				775668C82722D4E5009EBD42 /* APIService.swift in Sources */,
 				775668CB2722D9BA009EBD42 /* RoverPhotos.swift in Sources */,
-				775668C32722D4B3009EBD42 /* AlbomSelectionView.swift in Sources */,
+				775668C32722D4B3009EBD42 /* RoverSelectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,7 +324,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MarsPhotos/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MarsPhotos/SupportingFiles/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -349,7 +353,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MarsPhotos/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MarsPhotos/SupportingFiles/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

@@ -25,10 +25,20 @@ class APIService {
         return "https://api.nasa.gov/mars-photos/api/v1/rovers/\(name.rawValue)/photos?earth_date=\(dateStr)&api_key=\(apiKey)"
     }
     
-    func fetchPhotoFrom(rover name: RoverName, for date: Date) -> AnyPublisher<RoverPhotos, Never> {
+    func fetchPhotoFrom(rover name: RoverName, for date: Date) -> AnyPublisher<RoverPhotos, APIServiceError> {
         let urlStr = getUrlFrom(rover: name, for: date)
+        
         guard let url = URL(string: urlStr) else {
-            return Just(.error).eraseToAnyPublisher()
+            return Fail(error: APIServiceError.urlError).eraseToAnyPublisher()
         }
+        
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map { $0.data }
+            .decode(type: RoverPhotos.self, decoder: JSONDecoder())
+            .catch { error in
+                Fail(error: APIServiceError.urlError)
+            }
+            .receive(on: RunLoop.main)
+            .eraseToAnyPublisher()
     }
 }

@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  RoverSelectionView.swift
 //  MarsPhotos
 //
 //  Created by Viktor Prokolota on 22.10.2021.
@@ -7,16 +7,15 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct RoverSelectionView: View {
     var body: some View {
-//        Image(
         Text("Hello, world!")
             .padding()
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct RoverSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        RoverSelectionView()
     }
 }

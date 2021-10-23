@@ -7,8 +7,20 @@
 
 import Foundation
 
-enum Response {
+enum Response: Codable {
+    case error(String)
+    case photos([RoverPhotos])
     
+    private enum CodingKeys: String, CodingKey {
+        case photos
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        let payload = try? container.decode([RoverPhotos].self, forKey: .photos)
+        self = payload.map { .photos($0) } ?? .error("Decoding error")
+    }
 }
 
 struct RoverPhotos: Codable {
