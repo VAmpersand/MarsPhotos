@@ -15,6 +15,7 @@
 		775668CB2722D9BA009EBD42 /* RoverPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668CA2722D9BA009EBD42 /* RoverPhotos.swift */; };
 		775668CE27242893009EBD42 /* APIServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668CD27242893009EBD42 /* APIServiceError.swift */; };
 		775668D127242AEA009EBD42 /* RoverSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668D027242AEA009EBD42 /* RoverSelectionViewModel.swift */; };
+		775668D527243577009EBD42 /* TopSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668D427243577009EBD42 /* TopSegment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		775668CA2722D9BA009EBD42 /* RoverPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverPhotos.swift; sourceTree = "<group>"; };
 		775668CD27242893009EBD42 /* APIServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceError.swift; sourceTree = "<group>"; };
 		775668D027242AEA009EBD42 /* RoverSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverSelectionViewModel.swift; sourceTree = "<group>"; };
+		775668D427243577009EBD42 /* TopSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSegment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 		775668B12722D1C2009EBD42 /* MarsPhotos */ = {
 			isa = PBXGroup;
 			children = (
+				775668D227243549009EBD42 /* Helpers */,
 				775668C02722D20C009EBD42 /* SupportingFiles */,
 				775668C52722D4CA009EBD42 /* APIService */,
 				775668C12722D459009EBD42 /* RoverSelectionView */,
@@ -117,6 +120,22 @@
 				775668CA2722D9BA009EBD42 /* RoverPhotos.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		775668D227243549009EBD42 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				775668D327243565009EBD42 /* Shapes */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		775668D327243565009EBD42 /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				775668D427243577009EBD42 /* TopSegment.swift */,
+			);
+			path = Shapes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,6 +211,7 @@
 				775668CE27242893009EBD42 /* APIServiceError.swift in Sources */,
 				775668D127242AEA009EBD42 /* RoverSelectionViewModel.swift in Sources */,
 				775668B32722D1C2009EBD42 /* MarsPhotosApp.swift in Sources */,
+				775668D527243577009EBD42 /* TopSegment.swift in Sources */,
 				775668C82722D4E5009EBD42 /* APIService.swift in Sources */,
 				775668CB2722D9BA009EBD42 /* RoverPhotos.swift in Sources */,
 				775668C32722D4B3009EBD42 /* RoverSelectionView.swift in Sources */,

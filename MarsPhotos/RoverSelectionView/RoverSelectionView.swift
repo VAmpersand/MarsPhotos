@@ -9,9 +9,15 @@ import SwiftUI
 
 struct RoverSelectionView: View {
     var body: some View {
-    
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            Image("spirit")
+                .resizable()
+                .scaledToFit()
+                .frame(alignment: .top)
+                .clipShape(TopSegment())
+                .ignoresSafeArea()
+            Spacer()
+        }
     }
 }
 
