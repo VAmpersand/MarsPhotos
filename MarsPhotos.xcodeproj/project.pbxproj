@@ -16,6 +16,11 @@
 		775668CE27242893009EBD42 /* APIServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668CD27242893009EBD42 /* APIServiceError.swift */; };
 		775668D127242AEA009EBD42 /* RoverSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668D027242AEA009EBD42 /* RoverSelectionViewModel.swift */; };
 		775668D527243577009EBD42 /* TopSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668D427243577009EBD42 /* TopSegment.swift */; };
+		775668D727258380009EBD42 /* RightSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668D627258380009EBD42 /* RightSegment.swift */; };
+		775668DA2725893D009EBD42 /* UIScreen + extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668D92725893D009EBD42 /* UIScreen + extensions.swift */; };
+		775668DD272595B1009EBD42 /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 775668DC272595B1009EBD42 /* PureSwiftUI */; };
+		775668DF2728206B009EBD42 /* LeftSegemnt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668DE2728206B009EBD42 /* LeftSegemnt.swift */; };
+		775668E1272824DF009EBD42 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668E0272824DF009EBD42 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +34,10 @@
 		775668CD27242893009EBD42 /* APIServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceError.swift; sourceTree = "<group>"; };
 		775668D027242AEA009EBD42 /* RoverSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverSelectionViewModel.swift; sourceTree = "<group>"; };
 		775668D427243577009EBD42 /* TopSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSegment.swift; sourceTree = "<group>"; };
+		775668D627258380009EBD42 /* RightSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightSegment.swift; sourceTree = "<group>"; };
+		775668D92725893D009EBD42 /* UIScreen + extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen + extensions.swift"; sourceTree = "<group>"; };
+		775668DE2728206B009EBD42 /* LeftSegemnt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSegemnt.swift; sourceTree = "<group>"; };
+		775668E0272824DF009EBD42 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				775668DD272595B1009EBD42 /* PureSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +100,7 @@
 		775668C12722D459009EBD42 /* RoverSelectionView */ = {
 			isa = PBXGroup;
 			children = (
+				775668E227282F51009EBD42 /*  Views */,
 				775668C42722D4B8009EBD42 /* ViewModel */,
 				775668C22722D4B3009EBD42 /* RoverSelectionView.swift */,
 			);
@@ -125,7 +136,8 @@
 		775668D227243549009EBD42 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				775668D327243565009EBD42 /* Shapes */,
+				775668D827258921009EBD42 /* Extensions */,
+				775668E0272824DF009EBD42 /* Constants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -134,8 +146,26 @@
 			isa = PBXGroup;
 			children = (
 				775668D427243577009EBD42 /* TopSegment.swift */,
+				775668DE2728206B009EBD42 /* LeftSegemnt.swift */,
+				775668D627258380009EBD42 /* RightSegment.swift */,
 			);
 			path = Shapes;
+			sourceTree = "<group>";
+		};
+		775668D827258921009EBD42 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				775668D92725893D009EBD42 /* UIScreen + extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		775668E227282F51009EBD42 /*  Views */ = {
+			isa = PBXGroup;
+			children = (
+				775668D327243565009EBD42 /* Shapes */,
+			);
+			path = " Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +184,9 @@
 			dependencies = (
 			);
 			name = MarsPhotos;
+			packageProductDependencies = (
+				775668DC272595B1009EBD42 /* PureSwiftUI */,
+			);
 			productName = MarsPhotos;
 			productReference = 775668AF2722D1C1009EBD42 /* MarsPhotos.app */;
 			productType = "com.apple.product-type.application";
@@ -182,6 +215,9 @@
 				Base,
 			);
 			mainGroup = 775668A62722D1C1009EBD42;
+			packageReferences = (
+				775668DB272595B1009EBD42 /* XCRemoteSwiftPackageReference "pure-swift-ui" */,
+			);
 			productRefGroup = 775668B02722D1C1009EBD42 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -209,8 +245,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				775668CE27242893009EBD42 /* APIServiceError.swift in Sources */,
+				775668E1272824DF009EBD42 /* Constants.swift in Sources */,
 				775668D127242AEA009EBD42 /* RoverSelectionViewModel.swift in Sources */,
+				775668D727258380009EBD42 /* RightSegment.swift in Sources */,
 				775668B32722D1C2009EBD42 /* MarsPhotosApp.swift in Sources */,
+				775668DF2728206B009EBD42 /* LeftSegemnt.swift in Sources */,
+				775668DA2725893D009EBD42 /* UIScreen + extensions.swift in Sources */,
 				775668D527243577009EBD42 /* TopSegment.swift in Sources */,
 				775668C82722D4E5009EBD42 /* APIService.swift in Sources */,
 				775668CB2722D9BA009EBD42 /* RoverPhotos.swift in Sources */,
@@ -417,6 +457,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		775668DB272595B1009EBD42 /* XCRemoteSwiftPackageReference "pure-swift-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CodeSlicing/pure-swift-ui.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		775668DC272595B1009EBD42 /* PureSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 775668DB272595B1009EBD42 /* XCRemoteSwiftPackageReference "pure-swift-ui" */;
+			productName = PureSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 775668A72722D1C1009EBD42 /* Project object */;
 }
