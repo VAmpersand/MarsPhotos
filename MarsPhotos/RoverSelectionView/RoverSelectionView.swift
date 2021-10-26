@@ -30,7 +30,6 @@ struct RoverSelectionView: View {
                         .scaledToFill()
                         .frame(UIScreen.screenWidth, UIScreen.screenWidth * 1.255, .trailing)
                         .clipShape(RightSegment())
-                    
                 }
                 .ignoresSafeArea()
                 Spacer()
@@ -41,6 +40,5 @@ struct RoverSelectionView: View {
 struct RoverSelectionView_Previews: PreviewProvider {
     static var previews: some View {
         RoverSelectionView()
-            .previewDevice(.iPhone_12_Pro_Max)
     }
 }
