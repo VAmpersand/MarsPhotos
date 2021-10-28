@@ -10,6 +10,8 @@ import PureSwiftUI
 
 struct RoverSelectionView: View {
     
+    @State var selectedRover: RoverName = .opportunity
+    
     var body: some View {
         
             VStack {
@@ -18,19 +20,28 @@ struct RoverSelectionView: View {
                         .resizable()
                         .scaledToFill()
                         .frame(UIScreen.screenWidth, UIScreen.screenWidth * 1.255, .trailing)
-                        .clipShape(TopSegment())
+                        .clipShape(TopSegment(selectedRover: selectedRover))
+                        .onTapGesture {
+                            selectedRover = .opportunity
+                        }
                     
                     Image("spirit")
                         .resizable()
                         .scaledToFill()
                         .frame(UIScreen.screenWidth, UIScreen.screenWidth * 1.255, .trailing)
-                        .clipShape(LeftSegment())
+                        .clipShape(LeftSegment(selectedRover: selectedRover))
+                        .onTapGesture {
+                            selectedRover = .spirit
+                        }
                     
                     Image("curiosity")
                         .resizable()
                         .scaledToFill()
                         .frame(UIScreen.screenWidth, UIScreen.screenWidth * 1.255, .trailing)
-                        .clipShape(RightSegment())
+                        .clipShape(RightSegment(selectedRover: selectedRover))
+                        .onTapGesture {
+                            selectedRover = .curiosity
+                        }
                 }
                 
                 Text("ROVER")
