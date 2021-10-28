@@ -31,9 +31,25 @@ struct RoverSelectionView: View {
                         .frame(UIScreen.screenWidth, UIScreen.screenWidth * 1.255, .trailing)
                         .clipShape(RightSegment())
                 }
-                .ignoresSafeArea()
+                
+                Spacer()
+                        .frame(height: 25)
+            
+                Text("ROVER")
+                    .hPadding(UIScreen.screenWidth * 0.04)
+                    .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 12))
+                    .frame(UIScreen.screenWidth, .infinity, .leading)
+                    .foregroundColor(Color.init(hex: Colors.titleGray.rawValue))
+                
+                Text("Curiosity")
+                    .hPadding(UIScreen.screenWidth * 0.04)
+                    .font(Font.custom(Fonts.abrilFatface.rawValue, fixedSize: 32))
+                    .frame(UIScreen.screenWidth, .infinity, .leading)
+                    .foregroundColor(Color.init(hex: Colors.titleDarkGray.rawValue))
+                
                 Spacer()
             }
+            .ignoresSafeArea()
     }
 }
 

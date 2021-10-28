@@ -35,7 +35,7 @@ struct RoverPhotos: Codable {
 struct Camera: Codable {
     let id: Int
     let name: String
-    let roverId: String
+    let roverId: Int
     let fullName: String
 }
 

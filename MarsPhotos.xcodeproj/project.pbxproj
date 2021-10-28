@@ -21,6 +21,11 @@
 		775668DD272595B1009EBD42 /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 775668DC272595B1009EBD42 /* PureSwiftUI */; };
 		775668DF2728206B009EBD42 /* LeftSegemnt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668DE2728206B009EBD42 /* LeftSegemnt.swift */; };
 		775668E1272824DF009EBD42 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668E0272824DF009EBD42 /* Constants.swift */; };
+		77586BD7272AA37000C0564C /* AbrilFatface-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77586BD6272AA37000C0564C /* AbrilFatface-Regular.otf */; };
+		77586BD9272AA37F00C0564C /* Lato-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 77586BD8272AA37E00C0564C /* Lato-Heavy.ttf */; };
+		77586BDC272AAF4800C0564C /* Color + extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77586BDB272AAF4800C0564C /* Color + extensions.swift */; };
+		77586BDE272AB33A00C0564C /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77586BDD272AB33A00C0564C /* Fonts.swift */; };
+		77586BE0272AB3F500C0564C /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77586BDF272AB3F500C0564C /* Colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +43,12 @@
 		775668D92725893D009EBD42 /* UIScreen + extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen + extensions.swift"; sourceTree = "<group>"; };
 		775668DE2728206B009EBD42 /* LeftSegemnt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSegemnt.swift; sourceTree = "<group>"; };
 		775668E0272824DF009EBD42 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		77586BD6272AA37000C0564C /* AbrilFatface-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AbrilFatface-Regular.otf"; sourceTree = "<group>"; };
+		77586BD8272AA37E00C0564C /* Lato-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Heavy.ttf"; sourceTree = "<group>"; };
+		77586BDA272AAD8E00C0564C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77586BDB272AAF4800C0564C /* Color + extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color + extensions.swift"; sourceTree = "<group>"; };
+		77586BDD272AB33A00C0564C /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		77586BDF272AB3F500C0564C /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +102,8 @@
 		775668C02722D20C009EBD42 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				77586BDA272AAD8E00C0564C /* Info.plist */,
+				77586BD5272AA35D00C0564C /* Fonts */,
 				775668B62722D1C5009EBD42 /* Assets.xcassets */,
 				775668B82722D1C5009EBD42 /* Preview Content */,
 			);
@@ -138,6 +151,8 @@
 			children = (
 				775668D827258921009EBD42 /* Extensions */,
 				775668E0272824DF009EBD42 /* Constants.swift */,
+				77586BDD272AB33A00C0564C /* Fonts.swift */,
+				77586BDF272AB3F500C0564C /* Colors.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -156,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				775668D92725893D009EBD42 /* UIScreen + extensions.swift */,
+				77586BDB272AAF4800C0564C /* Color + extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -166,6 +182,15 @@
 				775668D327243565009EBD42 /* Shapes */,
 			);
 			path = " Views";
+			sourceTree = "<group>";
+		};
+		77586BD5272AA35D00C0564C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				77586BD8272AA37E00C0564C /* Lato-Heavy.ttf */,
+				77586BD6272AA37000C0564C /* AbrilFatface-Regular.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,8 +257,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77586BD9272AA37F00C0564C /* Lato-Heavy.ttf in Resources */,
 				775668BA2722D1C5009EBD42 /* Preview Assets.xcassets in Resources */,
 				775668B72722D1C5009EBD42 /* Assets.xcassets in Resources */,
+				77586BD7272AA37000C0564C /* AbrilFatface-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,9 +273,12 @@
 			files = (
 				775668CE27242893009EBD42 /* APIServiceError.swift in Sources */,
 				775668E1272824DF009EBD42 /* Constants.swift in Sources */,
+				77586BDE272AB33A00C0564C /* Fonts.swift in Sources */,
+				77586BE0272AB3F500C0564C /* Colors.swift in Sources */,
 				775668D127242AEA009EBD42 /* RoverSelectionViewModel.swift in Sources */,
 				775668D727258380009EBD42 /* RightSegment.swift in Sources */,
 				775668B32722D1C2009EBD42 /* MarsPhotosApp.swift in Sources */,
+				77586BDC272AAF4800C0564C /* Color + extensions.swift in Sources */,
 				775668DF2728206B009EBD42 /* LeftSegemnt.swift in Sources */,
 				775668DA2725893D009EBD42 /* UIScreen + extensions.swift in Sources */,
 				775668D527243577009EBD42 /* TopSegment.swift in Sources */,
@@ -387,9 +417,11 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MarsPhotos/SupportingFiles/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MarsPhotos/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -402,7 +434,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -416,9 +448,11 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MarsPhotos/SupportingFiles/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MarsPhotos/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -431,7 +465,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
