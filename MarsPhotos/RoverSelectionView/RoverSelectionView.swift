@@ -9,6 +9,7 @@ import SwiftUI
 import PureSwiftUI
 
 struct RoverSelectionView: View {
+    
     var body: some View {
         
             VStack {
@@ -32,17 +33,14 @@ struct RoverSelectionView: View {
                         .clipShape(RightSegment())
                 }
                 
-                Spacer()
-                        .frame(height: 25)
-            
                 Text("ROVER")
-                    .hPadding(UIScreen.screenWidth * 0.04)
+                    .offset(UIScreen.screenWidth * 0.04, 25)
                     .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 12))
                     .frame(UIScreen.screenWidth, .infinity, .leading)
                     .foregroundColor(Color.init(hex: Colors.titleGray.rawValue))
                 
                 Text("Curiosity")
-                    .hPadding(UIScreen.screenWidth * 0.04)
+                    .offset(UIScreen.screenWidth * 0.04, 25)
                     .font(Font.custom(Fonts.abrilFatface.rawValue, fixedSize: 32))
                     .frame(UIScreen.screenWidth, .infinity, .leading)
                     .foregroundColor(Color.init(hex: Colors.titleDarkGray.rawValue))
@@ -55,6 +53,8 @@ struct RoverSelectionView: View {
 
 struct RoverSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        RoverSelectionView()
+        Group {
+            RoverSelectionView()
+        }
     }
 }

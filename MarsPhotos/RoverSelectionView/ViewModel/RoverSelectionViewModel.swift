@@ -10,4 +10,6 @@ import Combine
 
 final class RoverSelectionViewModel: ObservableObject {
     
+//    @Published private(set) var currentRover = 
+    
 }
