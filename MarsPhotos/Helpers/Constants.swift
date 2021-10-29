@@ -8,4 +8,9 @@
 import SwiftUI
 import PureSwiftUI
 
-let layoutConfig = LayoutGuideConfig.grid(columns: 100, rows: 126)
+
+struct Constants {
+    static let layoutConfig = LayoutGuideConfig.grid(columns: 100, rows: 126)
+    
+    static let apiKey = "eb0Q4TEg6PKMZTlKogsUBgxQWGHH1SrWEgqfQxP4"
+}

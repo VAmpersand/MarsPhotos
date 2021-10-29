@@ -14,7 +14,7 @@ struct RightSegment: Shape {
 
     func path(in rect: CGRect) -> Path {
         
-        let grid = layoutConfig.layout(in: rect)
+        let grid = Constants.layoutConfig.layout(in: rect)
         var path = Path()
         
         if selectedRover == .curiosity {

@@ -10,6 +10,8 @@ import PureSwiftUI
 
 struct RoverSelectionView: View {
     
+    @ObservedObject var viewModel = RoverSelectionViewModel()
+    
     @State private var selectedRover: RoverName = .opportunity
     @State private var selectedItem = RoverName.opportunity.rawValue
     
@@ -67,6 +69,7 @@ struct RoverSelectionView: View {
                 Spacer()
                 
                 Button {
+                    self.viewModel.currentRover = self.selectedRover
                     
                 } label: {
                     Text("Fetch")
@@ -90,13 +93,5 @@ struct RoverSelectionView: View {
             .font(Font.custom(Fonts.abrilFatface.rawValue, fixedSize: 32))
             .frame(UIScreen.screenWidth, .infinity, .leading)
             .foregroundColor(Color.init(hex: Colors.titleDarkGray.rawValue))
-    }
-}
-
-struct RoverSelectionView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            RoverSelectionView()
-        }
     }
 }

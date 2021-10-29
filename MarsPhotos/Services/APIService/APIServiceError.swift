@@ -8,6 +8,6 @@
 import Foundation
 
 enum APIServiceError: Error {
-    case urlError
-    case decodeError
+    case networkError(description: String)
+    case decodeError(description: String)
 }
