@@ -46,7 +46,8 @@ struct RoverSelectionView: View {
                 }
                 
                 Text("FETCH PHOTO FROM ROVER")
-                    .offset(UIScreen.screenWidth * 0.04, 25)
+                    .padding(.top)
+                    .padding(.leading)
                     .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 12))
                     .frame(UIScreen.screenWidth, .infinity, .leading)
                     .foregroundColor(Color.init(hex: Colors.titleGray.rawValue))
@@ -62,44 +63,22 @@ struct RoverSelectionView: View {
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 .frame(UIScreen.screenWidth, 40, .leading)
-                .offset(0, 20)
-                
-                
-//                
-//                ScrollView(.horizontal, showsIndicators: false){
-//                    HStack(spacing: UIScreen.screenWidth / 2) {
-//                        Text("Opportunity")
-//                            .offset(UIScreen.screenWidth * 0.04, 0)
-//                            .font(Font.custom(Fonts.abrilFatface.rawValue, fixedSize: 32))
-//                            .frame(UIScreen.screenWidth / 2, .infinity, .topLeading)
-//                            .foregroundColor(Color.init(hex: Colors.titleDarkGray.rawValue))
-//                        
-//                        Text("Spirit")
-//                            .offset(UIScreen.screenWidth * 0.04, 0)
-//                            .font(Font.custom(Fonts.abrilFatface.rawValue, fixedSize: 32))
-//                            .frame(UIScreen.screenWidth / 2, .infinity, .topLeading)
-//                            .foregroundColor(Color.init(hex: Colors.titleDarkGray.rawValue))
-//                        
-//                        Text("Curiosity")
-//                            .offset(UIScreen.screenWidth * 0.04, 0)
-//                            .font(Font.custom(Fonts.abrilFatface.rawValue, fixedSize: 32))
-//                            .frame(UIScreen.screenWidth / 2, .infinity, .topLeading)
-//                            .foregroundColor(Color.init(hex: Colors.titleDarkGray.rawValue))
-//                        
-//                    }
-//                }
-//                .offset(0, 20)
-//                .background(Color.red)
-//                .frame(width: .infinity, height: 20)
-               
-                
-//                Text("Curiosity")
-//                    .offset(UIScreen.screenWidth * 0.04, 25)
-//                    .font(Font.custom(Fonts.abrilFatface.rawValue, fixedSize: 32))
-//                    .frame(UIScreen.screenWidth, .infinity, .leading)
-//                    .foregroundColor(Color.init(hex: Colors.titleDarkGray.rawValue))
-                
+        
                 Spacer()
+                
+                Button {
+                    
+                } label: {
+                    Text("Fetch")
+                        .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 15))
+                        .frame(UIScreen.screenWidth - 100, .infinity)
+                        .foregroundColor(Color.white)
+                        .padding()
+                }
+                .background(Color.blue)
+                .frame(UIScreen.screenWidth - 100, 50)
+                .clipCapsule()
+                .padding()
             }
             .ignoresSafeArea()
     }
@@ -111,7 +90,6 @@ struct RoverSelectionView: View {
             .font(Font.custom(Fonts.abrilFatface.rawValue, fixedSize: 32))
             .frame(UIScreen.screenWidth, .infinity, .leading)
             .foregroundColor(Color.init(hex: Colors.titleDarkGray.rawValue))
-
     }
 }
 

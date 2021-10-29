@@ -16,7 +16,7 @@ struct TopSegment: Shape {
         let grid = layoutConfig.layout(in: rect)
         var path = Path()
         
-        if selectedRover == .spirit {
+        if selectedRover == .opportunity {
             path.move(to: grid[0, 0])
             path.addLine(to: grid[100, 0])
             path.addLine(to: grid[100, 31])

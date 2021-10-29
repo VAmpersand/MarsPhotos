@@ -16,7 +16,7 @@ struct LeftSegment: Shape {
         let grid = layoutConfig.layout(in: rect)
         var path = Path()
         
-        if selectedRover == .opportunity {
+        if selectedRover == .spirit {
             path.move(to: grid[0, 32])
             path.addLine(to: grid[91, 122])
             path.curve(grid[89, 126], cp1: grid[92, 123], cp2: grid[92, 126])
