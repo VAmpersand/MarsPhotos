@@ -26,6 +26,7 @@
 		77586BDC272AAF4800C0564C /* Color + extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77586BDB272AAF4800C0564C /* Color + extensions.swift */; };
 		77586BDE272AB33A00C0564C /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77586BDD272AB33A00C0564C /* Fonts.swift */; };
 		77586BE0272AB3F500C0564C /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77586BDF272AB3F500C0564C /* Colors.swift */; };
+		77586BE2272BBD4600C0564C /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77586BE1272BBD4600C0564C /* Strings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		77586BDB272AAF4800C0564C /* Color + extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color + extensions.swift"; sourceTree = "<group>"; };
 		77586BDD272AB33A00C0564C /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		77586BDF272AB3F500C0564C /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		77586BE1272BBD4600C0564C /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 				775668E0272824DF009EBD42 /* Constants.swift */,
 				77586BDD272AB33A00C0564C /* Fonts.swift */,
 				77586BDF272AB3F500C0564C /* Colors.swift */,
+				77586BE1272BBD4600C0564C /* Strings.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				775668D127242AEA009EBD42 /* RoverSelectionViewModel.swift in Sources */,
 				775668D727258380009EBD42 /* RightSegment.swift in Sources */,
 				775668B32722D1C2009EBD42 /* MarsPhotosApp.swift in Sources */,
+				77586BE2272BBD4600C0564C /* Strings.swift in Sources */,
 				77586BDC272AAF4800C0564C /* Color + extensions.swift in Sources */,
 				775668DF2728206B009EBD42 /* LeftSegemnt.swift in Sources */,
 				775668DA2725893D009EBD42 /* UIScreen + extensions.swift in Sources */,

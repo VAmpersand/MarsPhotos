@@ -10,7 +10,8 @@ import PureSwiftUI
 
 struct RoverSelectionView: View {
     
-    @State var selectedRover: RoverName = .opportunity
+    @State private var selectedRover: RoverName = .opportunity
+    @State private var selectedItem = RoverName.opportunity.rawValue
     
     var body: some View {
         
@@ -24,7 +25,7 @@ struct RoverSelectionView: View {
                         .onTapGesture {
                             selectedRover = .opportunity
                         }
-                    
+
                     Image("spirit")
                         .resizable()
                         .scaledToFill()
@@ -44,21 +45,73 @@ struct RoverSelectionView: View {
                         }
                 }
                 
-                Text("ROVER")
+                Text("FETCH PHOTO FROM ROVER")
                     .offset(UIScreen.screenWidth * 0.04, 25)
                     .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 12))
                     .frame(UIScreen.screenWidth, .infinity, .leading)
                     .foregroundColor(Color.init(hex: Colors.titleGray.rawValue))
                 
-                Text("Curiosity")
-                    .offset(UIScreen.screenWidth * 0.04, 25)
-                    .font(Font.custom(Fonts.abrilFatface.rawValue, fixedSize: 32))
-                    .frame(UIScreen.screenWidth, .infinity, .leading)
-                    .foregroundColor(Color.init(hex: Colors.titleDarkGray.rawValue))
+                TabView(selection: $selectedItem){
+                    ForEach(RoverName.allCases, id: \.self) { name in
+                        getTitleViewFor(rover: name)
+                            .tag(name.rawValue)
+                            .onDisappear {
+                                selectedRover = RoverName(rawValue: self.selectedItem) ?? .opportunity
+                            }
+                    }
+                }
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                .frame(UIScreen.screenWidth, 40, .leading)
+                .offset(0, 20)
+                
+                
+//                
+//                ScrollView(.horizontal, showsIndicators: false){
+//                    HStack(spacing: UIScreen.screenWidth / 2) {
+//                        Text("Opportunity")
+//                            .offset(UIScreen.screenWidth * 0.04, 0)
+//                            .font(Font.custom(Fonts.abrilFatface.rawValue, fixedSize: 32))
+//                            .frame(UIScreen.screenWidth / 2, .infinity, .topLeading)
+//                            .foregroundColor(Color.init(hex: Colors.titleDarkGray.rawValue))
+//                        
+//                        Text("Spirit")
+//                            .offset(UIScreen.screenWidth * 0.04, 0)
+//                            .font(Font.custom(Fonts.abrilFatface.rawValue, fixedSize: 32))
+//                            .frame(UIScreen.screenWidth / 2, .infinity, .topLeading)
+//                            .foregroundColor(Color.init(hex: Colors.titleDarkGray.rawValue))
+//                        
+//                        Text("Curiosity")
+//                            .offset(UIScreen.screenWidth * 0.04, 0)
+//                            .font(Font.custom(Fonts.abrilFatface.rawValue, fixedSize: 32))
+//                            .frame(UIScreen.screenWidth / 2, .infinity, .topLeading)
+//                            .foregroundColor(Color.init(hex: Colors.titleDarkGray.rawValue))
+//                        
+//                    }
+//                }
+//                .offset(0, 20)
+//                .background(Color.red)
+//                .frame(width: .infinity, height: 20)
+               
+                
+//                Text("Curiosity")
+//                    .offset(UIScreen.screenWidth * 0.04, 25)
+//                    .font(Font.custom(Fonts.abrilFatface.rawValue, fixedSize: 32))
+//                    .frame(UIScreen.screenWidth, .infinity, .leading)
+//                    .foregroundColor(Color.init(hex: Colors.titleDarkGray.rawValue))
                 
                 Spacer()
             }
             .ignoresSafeArea()
+    }
+    
+    @ViewBuilder
+    func getTitleViewFor(rover name: RoverName) -> some View {
+        Text(Strings.getTitleFor(rover: name))
+            .offset(UIScreen.screenWidth * 0.04, 0)
+            .font(Font.custom(Fonts.abrilFatface.rawValue, fixedSize: 32))
+            .frame(UIScreen.screenWidth, .infinity, .leading)
+            .foregroundColor(Color.init(hex: Colors.titleDarkGray.rawValue))
+
     }
 }
 

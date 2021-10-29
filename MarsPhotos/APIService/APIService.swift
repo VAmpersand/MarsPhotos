@@ -8,8 +8,8 @@
 import Foundation
 import Combine
 
-enum RoverName: String {
-    case curiosity, opportunity, spirit
+enum RoverName: String, CaseIterable {
+    case opportunity, spirit, curiosity
 }
 
 class APIService {
