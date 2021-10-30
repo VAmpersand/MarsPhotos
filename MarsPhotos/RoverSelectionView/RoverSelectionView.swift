@@ -24,8 +24,12 @@ struct RoverSelectionView: View {
                         .scaledToFill()
                         .frame(UIScreen.screenWidth, UIScreen.screenWidth * 1.255, .trailing)
                         .clipShape(TopSegment(selectedRover: selectedRover))
+                        .contentShape(TopSegment(selectedRover: selectedRover))
                         .onTapGesture {
                             selectedRover = .opportunity
+                            withAnimation {
+                                selectedItem = RoverName.opportunity.rawValue
+                            }
                         }
 
                     Image("spirit")
@@ -33,8 +37,12 @@ struct RoverSelectionView: View {
                         .scaledToFill()
                         .frame(UIScreen.screenWidth, UIScreen.screenWidth * 1.255, .trailing)
                         .clipShape(LeftSegment(selectedRover: selectedRover))
+                        .contentShape(LeftSegment(selectedRover: selectedRover))
                         .onTapGesture {
                             selectedRover = .spirit
+                            withAnimation {
+                                selectedItem = RoverName.spirit.rawValue
+                            }
                         }
                     
                     Image("curiosity")
@@ -42,8 +50,12 @@ struct RoverSelectionView: View {
                         .scaledToFill()
                         .frame(UIScreen.screenWidth, UIScreen.screenWidth * 1.255, .trailing)
                         .clipShape(RightSegment(selectedRover: selectedRover))
+                        .contentShape(RightSegment(selectedRover: selectedRover))
                         .onTapGesture {
                             selectedRover = .curiosity
+                            withAnimation {
+                                selectedItem = RoverName.curiosity.rawValue
+                            }
                         }
                 }
                 
@@ -95,3 +107,4 @@ struct RoverSelectionView: View {
             .foregroundColor(Color.init(hex: Colors.titleDarkGray.rawValue))
     }
 }
+
