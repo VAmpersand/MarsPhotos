@@ -8,11 +8,5 @@
 import Foundation
 
 struct Strings {
-    public static func getTitleFor(rover name: RoverName) -> String {
-        switch name {
-        case .opportunity: return "Opportunity"
-        case .curiosity: return "Curiosity"
-        case .spirit: return "Spirit"
-        }
-    }
+   
 }

@@ -1,5 +1,5 @@
 //
-//  RightSegments.swift
+//  CuriositySegments.swift
 //  MarsPhotos
 //
 //  Created by Viktor Prokolota on 24.10.2021.
@@ -8,7 +8,7 @@
 import SwiftUI
 import PureSwiftUI
 
-struct RightSegment: Shape {
+struct CuriositySegment: Shape {
     
     var selectedRover: RoverName
 

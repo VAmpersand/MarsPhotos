@@ -1,5 +1,5 @@
 //
-//  LeftSegemnt.swift
+//  SpiritSegment.swift
 //  MarsPhotos
 //
 //  Created by Viktor Prokolota on 26.10.2021.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LeftSegment: Shape {
+struct SpiritSegment: Shape {
     
     var selectedRover: RoverName
     

@@ -1,5 +1,5 @@
 //
-//  TopSegment.swift
+//  OpportunitySegment.swift
 //  MarsPhotos
 //
 //  Created by Viktor Prokolota on 23.10.2021.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TopSegment: Shape {
+struct OpportunitySegment: Shape {
     
     var selectedRover: RoverName
     
