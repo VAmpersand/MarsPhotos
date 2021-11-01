@@ -12,7 +12,7 @@ final class RoverSelectionViewModel: ObservableObject {
     
     private var cancellable: Set<AnyCancellable> = []
     
-    @Published var currentRover: RoverName = .opportunity
+    @Published var currentRover: Rover = .opportunity
     @Published var photos: [Photo] = []
     
     init() {
@@ -22,13 +22,13 @@ final class RoverSelectionViewModel: ObservableObject {
 
 extension RoverSelectionViewModel {
     func subscribe() {
-        let date = Date(timeInterval: -2*86400, since: Date())
+        let date = Date(timeInterval: -2 * 86400, since: Date())
         
         $currentRover
             .dropFirst()
             .removeDuplicates()
-            .flatMap { (name: RoverName) -> AnyPublisher<PhotosResponse, APIServiceError> in
-                PhotoService.getPhotoFrom(rover: name, for: date)
+            .flatMap { (rover: Rover) -> AnyPublisher<PhotosResponse, APIServiceError> in
+                PhotoService.getPhotoFrom(rover: rover, for: date)
             }
             .sink(
                 receiveCompletion: { [weak self] result in

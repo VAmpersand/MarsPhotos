@@ -17,7 +17,7 @@ struct Photo: Codable, Identifiable {
     let camera: Camera
     let imgSrc: String
     let earthDate: String
-    let rover: Rover
+    let rover: RoverData
 }
 
 struct Camera: Codable {
@@ -27,7 +27,7 @@ struct Camera: Codable {
     let fullName: String
 }
 
-struct Rover: Codable {
+struct RoverData: Codable {
     let id: Int
     let name: String
     let landingDate: String

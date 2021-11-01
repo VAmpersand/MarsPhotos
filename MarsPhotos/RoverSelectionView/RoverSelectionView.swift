@@ -12,23 +12,21 @@ struct RoverSelectionView: View {
     
     @ObservedObject var viewModel = RoverSelectionViewModel()
     
-    @State private var selectedRover: RoverName = .opportunity
-    @State private var selectedItem = RoverName.opportunity.rawValue
+    @State private var selectedRover: Rover = .opportunity
     
     var body: some View {
         
         VStack {
             ZStack {
-                ForEach(RoverName.allCases, id: \.self) { name in
-                    Image(name.rawValue)
+                ForEach(Rover.allCases, id: \.self) { rover in
+                    Image(rover.rawValue)
                         .resizable()
                         .scaledToFill()
                         .frame(UIScreen.screenWidth, UIScreen.screenWidth * 1.255, .trailing)
-                        .modifier(ClipRoverShape(roverName: name, selectedRover: selectedRover))
+                        .modifier(ClipRoverShape(rover: rover, selectedRover: selectedRover))
                         .onTapGesture {
-                            selectedRover = name
                             withAnimation {
-                                selectedItem = name.rawValue
+                                selectedRover = rover
                             }
                         }
                 }
@@ -41,17 +39,15 @@ struct RoverSelectionView: View {
                 .frame(UIScreen.screenWidth, .infinity, .leading)
                 .foregroundColor(Color.init(hex: Colors.titleGray.rawValue))
             
-            TabView(selection: $selectedItem){
-                ForEach(RoverName.allCases, id: \.self) { name in
-                    getTitleViewFor(rover: name)
-                        .tag(name.rawValue)
-                        .onDisappear {
-                            selectedRover = RoverName(rawValue: self.selectedItem) ?? .opportunity
-                        }
+            TabView(selection: $selectedRover) {
+                ForEach(Rover.allCases, id: \.self) { rover in
+                    getTitleViewFor(rover: rover)
                 }
             }
+            .disabled(true)
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .frame(UIScreen.screenWidth, 40, .leading)
+            
             
             Spacer()
             
@@ -74,7 +70,7 @@ struct RoverSelectionView: View {
     }
     
     @ViewBuilder
-    func getTitleViewFor(rover name: RoverName) -> some View {
+    func getTitleViewFor(rover name: Rover) -> some View {
         Text(name.rawValue.firstUppercased)
             .offset(UIScreen.screenWidth * 0.04, 0)
             .font(Font.custom(Fonts.abrilFatface.rawValue, fixedSize: 32))
@@ -86,23 +82,39 @@ struct RoverSelectionView: View {
 
 struct ClipRoverShape: ViewModifier {
     
-    var roverName: RoverName
-    var selectedRover: RoverName
+    var rover: Rover
+    var selectedRover: Rover
     
     func body(content: Content) -> some View {
-        switch roverName {
+        let offset: CGFloat = rover == selectedRover ? UIScreen.screenWidth * 0.025 : 0
+        
+        switch rover {
         case .opportunity:
             content
-                .clipShape(OpportunitySegment(selectedRover: selectedRover))
-                .contentShape(OpportunitySegment(selectedRover: selectedRover))
+                .clipShape(OpportunitySegment())
+                .contentShape(OpportunitySegment())
+                .scaleEffect(rover == selectedRover ? 1.2 : 1)
+                .offset(-offset * 0.2, -offset * 1.3)
+            
         case .spirit:
             content
-                .clipShape(SpiritSegment(selectedRover: selectedRover))
-                .contentShape(SpiritSegment(selectedRover: selectedRover))
+                .clipShape(SpiritSegment())
+                .contentShape(SpiritSegment())
+                .scaleEffect(rover == selectedRover ? 1.2 : 1)
+                .offset(-offset * 4, -offset * 5)
+            
         case .curiosity:
             content
-                .clipShape(CuriositySegment(selectedRover: selectedRover))
-                .contentShape(CuriositySegment(selectedRover: selectedRover))
+                .clipShape(CuriositySegment())
+                .contentShape(CuriositySegment())
+                .scaleEffect(rover == selectedRover ? 1.2 : 1)
+                .offset(offset * 0.07, -offset * 1.2)
         }
     }
 }
+
+//struct RoverSelectionView_Previewer: PreviewProvider {
+//    static var previews: some View {
+//        RoverSelectionView()
+//    }
+//}
