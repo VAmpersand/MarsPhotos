@@ -5,9 +5,9 @@
         "package": "PureSwiftUI",
         "repositoryURL": "https://github.com/CodeSlicing/pure-swift-ui.git",
         "state": {
-          "branch": null,
-          "revision": "96c6e669f88f47ee2d4bf54c01a8d9de75d7ce82",
-          "version": "3.0.0"
+          "branch": "develop",
+          "revision": "67b909e143252ddb9f16f776b2329b0b29a57968",
+          "version": null
         }
       },
       {
