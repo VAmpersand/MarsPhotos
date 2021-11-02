@@ -14,7 +14,7 @@ enum Rover: String, CaseIterable {
 }
 
 class PhotoService {
-    static func getManifest(from rover: Rover) -> AnyPublisher<PhotosResponse, APIServiceError> {
+    static func getManifests(from rover: Rover) -> AnyPublisher<PhotosResponse, APIServiceError> {
         let urlStr = "https://api.nasa.gov/mars-photos/api/v1/manifest/\(rover.rawValue)?api_key=\(Constants.apiKey)"
 
         guard let url = URL(string: urlStr) else {
