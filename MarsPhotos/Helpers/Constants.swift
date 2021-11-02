@@ -9,10 +9,14 @@ import SwiftUI
 import PureSwiftUI
 
 struct Constants {
+    // MARK: - Layout
     static let layoutConfig = LayoutGuideConfig.grid(columns: 100, rows: 126)
+    static let offset = UIScreen.screenWidth * 0.04
     
+    // MARK: - API
     static let apiKey = "eb0Q4TEg6PKMZTlKogsUBgxQWGHH1SrWEgqfQxP4"
-    
+
+    // MARK: - URL
     static func getOficialSiteURL(for rover: Rover) -> URL {
         var urlStr: String {
             switch rover {
@@ -29,5 +33,5 @@ struct Constants {
         return url
     }
     
-    static let offset = UIScreen.screenWidth * 0.04
+   
 }

@@ -28,7 +28,7 @@ extension RoverSelectionViewModel {
             .dropFirst()
             .removeDuplicates()
             .flatMap { (rover: Rover) -> AnyPublisher<PhotosResponse, APIServiceError> in
-                PhotoService.getPhotoFrom(rover: rover, for: date)
+                PhotoService.getPhoto(from rover: rover, by: date)
             }
             .sink(
                 receiveCompletion: { [weak self] result in

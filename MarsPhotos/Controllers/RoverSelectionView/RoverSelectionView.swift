@@ -83,12 +83,12 @@ struct RoverSelectionView: View {
             Text(rover.rawValue.firstUppercased)
                 .font(Font.custom(Fonts.abrilFatface.rawValue, fixedSize: 32))
                 .padding(.horizontal, Constants.offset)
+                .padding(.bottom, 10)
                 .frame(UIScreen.screenWidth, .infinity, .leading)
                 .foregroundColor(Color.init(hex: Colors.titleDarkGray.rawValue))
             
             Text(Strings.missionTitle.uppercased())
                 .padding(.horizontal, Constants.offset)
-                .padding(.top, 10)
                 .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 12))
                 .frame(UIScreen.screenWidth, .infinity, .leading)
                 .foregroundColor(Color.init(hex: Colors.titleGray.rawValue))
