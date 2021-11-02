@@ -7,8 +7,6 @@
 
 import SwiftUI
 import PureSwiftUI
-import SafariServices
-
 
 // MARK: - RoverSelectionView
 struct RoverSelectionView: View {
@@ -44,7 +42,7 @@ struct RoverSelectionView: View {
                     
                     TabView(selection: $selectedRover.animation(.linear(duration: 0.15))) {
                         ForEach(Rover.allCases, id: \.self) { rover in
-                            getTitleView(for: rover)
+                            getRoverInfoView(for: rover)
                         }
                     }
                     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -80,7 +78,7 @@ struct RoverSelectionView: View {
     }
     
     @ViewBuilder
-    func getTitleView(for rover: Rover) -> some View {
+    func getRoverInfoView(for rover: Rover) -> some View {
         VStack {
             Text(rover.rawValue.firstUppercased)
                 .font(Font.custom(Fonts.abrilFatface.rawValue, fixedSize: 32))
@@ -164,21 +162,6 @@ struct ClipAnimatedShape: ViewModifier {
                 .offset(offset * 0.07, -offset * 1.2)
         }
     }
-}
-
-
-struct SafariView: UIViewControllerRepresentable {
-    
-    let url: URL
-    
-    func makeUIViewController(context: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
-        return SFSafariViewController(url: url)
-    }
-    
-    func updateUIViewController(_ uiViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<SafariView>) {
-        
-    }
-    
 }
 
 // MARK: - RoverSelectionView_Previewer

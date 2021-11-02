@@ -30,6 +30,7 @@
 		77586BE8272C105000C0564C /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77586BE7272C105000C0564C /* Decoder.swift */; };
 		77586BEA272EEDD000C0564C /* String + extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77586BE9272EEDD000C0564C /* String + extensions.swift */; };
 		777C412F27310B430031FF43 /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 777C412E27310B430031FF43 /* PureSwiftUI */; };
+		777C413227311E500031FF43 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C413127311E4F0031FF43 /* SafariView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		77586BE5272C0A3D00C0564C /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		77586BE7272C105000C0564C /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
 		77586BE9272EEDD000C0564C /* String + extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + extensions.swift"; sourceTree = "<group>"; };
+		777C413127311E4F0031FF43 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +95,7 @@
 				775668D227243549009EBD42 /* Helpers */,
 				775668C02722D20C009EBD42 /* SupportingFiles */,
 				77586BE4272C0A2E00C0564C /* Services */,
-				775668C12722D459009EBD42 /* RoverSelectionView */,
+				777C413027311E2C0031FF43 /* Controllers */,
 				775668B22722D1C2009EBD42 /* MarsPhotosApp.swift */,
 			);
 			path = MarsPhotos;
@@ -221,6 +223,15 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		777C413027311E2C0031FF43 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				775668C12722D459009EBD42 /* RoverSelectionView */,
+				777C413127311E4F0031FF43 /* SafariView.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -311,6 +322,7 @@
 				77586BE6272C0A3D00C0564C /* PhotoService.swift in Sources */,
 				77586BEA272EEDD000C0564C /* String + extensions.swift in Sources */,
 				77586BDC272AAF4800C0564C /* Color + extensions.swift in Sources */,
+				777C413227311E500031FF43 /* SafariView.swift in Sources */,
 				775668DF2728206B009EBD42 /* SpiritSegemnt.swift in Sources */,
 				775668DA2725893D009EBD42 /* UIScreen + extensions.swift in Sources */,
 				775668D527243577009EBD42 /* OpportunitySegment.swift in Sources */,
