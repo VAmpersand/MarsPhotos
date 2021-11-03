@@ -22,14 +22,18 @@ extension NasaAPIEndpoint: RequestBuilder {
     var urlRequest: URLRequest {
         switch self {
         case .manifests(let rover):
-            guard let url = URL(string: "\(Constants.api)/manifest/\(rover.rawValue)?api_key=\(Constants.apiKey)")
+            guard let url = URL(string: "\(Constants.api)/manifests/\(rover.rawValue)?api_key=\(Constants.apiKey)")
             else { preconditionFailure("Invalid URL format") }
+            
+            print("Request by URL: \(url)")
             
             return URLRequest(url: url)
             
         case .photoForSol(let sol, let rover):
             guard let url = URL(string: "\(Constants.api)/rovers/\(rover.rawValue)/photos?sol=\(sol)&api_key=\(Constants.apiKey)")
-                else { preconditionFailure("Invalid URL format") }
+            else { preconditionFailure("Invalid URL format") }
+            
+            print("Request by URL: \(url)")
             
             return URLRequest(url: url)
             
@@ -39,7 +43,9 @@ extension NasaAPIEndpoint: RequestBuilder {
             let dateStr = dateFormatter.string(from: date)
         
             guard let url = URL(string: "\(Constants.api)/rovers/\(rover.rawValue)/photos?earth_date=\(dateStr)&api_key=\(Constants.apiKey)")
-                else { preconditionFailure("Invalid URL format") }
+            else { preconditionFailure("Invalid URL format") }
+            
+            print("Request by URL: \(url)")
             
             return URLRequest(url: url)
         }

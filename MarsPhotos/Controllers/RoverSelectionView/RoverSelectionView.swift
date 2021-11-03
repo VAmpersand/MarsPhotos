@@ -14,7 +14,7 @@ struct RoverSelectionView: View {
     @ObservedObject var viewModel = RoverSelectionViewModel()
     
     @State private var selectedRover: Rover = .opportunity
-    @State var showSafari = false
+    @State private var showSafari = false
     
     var body: some View {
         ZStack {
@@ -57,7 +57,7 @@ struct RoverSelectionView: View {
                 Spacer()
                 
                 Button {
-                    self.viewModel.currentRover = self.selectedRover
+                    self.viewModel.selectedRover = self.selectedRover
                     
                 } label: {
                     Text("Fetch")
@@ -164,9 +164,9 @@ struct ClipAnimatedShape: ViewModifier {
     }
 }
 
-// MARK: - RoverSelectionView_Previewer
-struct RoverSelectionView_Previewer: PreviewProvider {
-    static var previews: some View {
-        RoverSelectionView()
-    }
-}
+//// MARK: - RoverSelectionView_Previewer
+//struct RoverSelectionView_Previewer: PreviewProvider {
+//    static var previews: some View {
+//        RoverSelectionView()
+//    }
+//}
