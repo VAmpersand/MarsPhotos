@@ -8,9 +8,8 @@
 import Foundation
 import Combine
 
-func decode<T: Decodable>(_ data: Data) -> AnyPublisher<T, APIServiceError> {
+func decode<T: Decodable>(_ data: Data) -> AnyPublisher<T, NetworkServiceError> {
     let decoder = JSONDecoder()
-    decoder.dateDecodingStrategy = .secondsSince1970
     decoder.keyDecodingStrategy = .convertFromSnakeCase
 
     return Just(data)

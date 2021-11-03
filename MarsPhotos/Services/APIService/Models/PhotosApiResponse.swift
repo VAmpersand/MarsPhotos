@@ -1,5 +1,5 @@
 //
-//  PhotosResponse.swift
+//  PhotosApiResponse.swift
 //  MarsPhotos
 //
 //  Created by Viktor Prokolota on 22.10.2021.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PhotosResponse: Codable {
+struct PhotosApiResponse: Codable {
     let photos: [Photo]
 }
 

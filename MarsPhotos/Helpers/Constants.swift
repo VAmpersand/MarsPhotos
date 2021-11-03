@@ -15,6 +15,7 @@ struct Constants {
     
     // MARK: - API
     static let apiKey = "eb0Q4TEg6PKMZTlKogsUBgxQWGHH1SrWEgqfQxP4"
+    static let api = "https://api.nasa.gov/mars-photos/api/v1"
 
     // MARK: - URL
     static func getOficialSiteURL(for rover: Rover) -> URL {

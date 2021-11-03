@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ManifestsResponse: Codable {
+struct ManifestsApiResponse: Codable {
     let photoManifest: Manifest
 }
 
