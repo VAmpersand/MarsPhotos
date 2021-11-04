@@ -11,17 +11,17 @@ import Combine
 final class RoverPhotoViewModel: ObservableObject, NasaAPIService {
     var apiSession: APIService
     
-    init(manifests: Manifest, apiSession: APIService = APISession()) {
+    init(manifest: Manifest, apiSession: APIService = APISession()) {
         self.apiSession = apiSession
-        self.manifest = manifests
+        self.manifest = manifest
         
         subscribe()
     }
     
     private var cancellable: Set<AnyCancellable> = []
     
-    @Published var photos: [Photo] = []
     @Published var manifest: Manifest
+    @Published var photos: [Photo] = []
 }
 
 extension RoverPhotoViewModel {
@@ -43,26 +43,6 @@ extension RoverPhotoViewModel {
                 }
             )
             .store(in: &cancellable)
-        
-        
-//        $selectedRover
-//            .dropFirst()
-//            .setFailureType(to: APIError.self)
-//            .flatMap { [unowned self] (rover: Rover) -> AnyPublisher<ManifestsApiResponse, APIError> in
-//                return self.getManifest(for: rover)
-//            }
-//            .sink(
-//                receiveCompletion: { result in
-//                    switch result {
-//                    case .failure(let error): print(error.localizedDescription)
-//                    case .finished: return
-//                    }
-//                },
-//                receiveValue: { [unowned self] manifest in
-//                    self.manifest = manifest
-//                }
-//            )
-//            .store(in: &cancellable)
         
     }
 }

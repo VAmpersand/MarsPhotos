@@ -12,86 +12,78 @@ import PureSwiftUI
 struct RoverSelectionView: View {
     
     @ObservedObject var viewModel = RoverSelectionViewModel()
-    @EnvironmentObject var appRouter: AppRouter
     
     @State private var selectedRover: Rover = .opportunity
     @State private var showSafari = false
+    @State private var showPhotos = false
     
     var body: some View {
-        ZStack {
-            ScrollView(showsIndicators: false) {
-                VStack {
-                    ZStack {
-                        ForEach(Rover.allCases, id: \.self) { rover in
-                            Image(Images.getShapesBg(for: rover))
-                                .resizable()
-                                .scaledToFill()
-                                .frame(UIScreen.screenWidth, UIScreen.screenWidth * 1.255, .trailing)
-                                .modifier(ClipAnimatedShape(rover: rover, selectedRover: selectedRover))
-                                .onTapGesture {
-                                    withAnimation { selectedRover = rover }
-                                }
-                        }
-                    }.padding(.top, 10)
-                    
-                    Text(Strings.fetchPhotoTitle.uppercased())
-                        .padding(.horizontal, Constants.offset)
-                        .padding(.top, 10)
-                        .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 12))
-                        .frame(UIScreen.screenWidth, .infinity, .leading)
-                        .foregroundColor(Color.init(hex: Colors.titleGray.rawValue))
-                    
-                    TabView(selection: $selectedRover.animation(.linear(duration: 0.15))) {
-                        ForEach(Rover.allCases, id: \.self) { rover in
-                            getRoverInfoView(for: rover)
-                        }
-                    }
-                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                    .frame(UIScreen.screenWidth, 250, .leading)
-                    
-                    Spacer()
-                        .frame(height: 100)
-                }
-            }
-            
-            VStack {
-                Spacer()
-                
-                Button {
-                    self.viewModel.selectedRover = self.selectedRover
-                    
-                    self.viewModel.manifest.publisher
-                        .sink(
-                           receiveValue: { manifest in
-//                               guard let manifest = manifest else { return }
-                               
-                               
-                               self.viewModel.router.routeToRoverPhotos(manifest: manifest)
+        NavigationView {
+            ZStack {
+                ScrollView(showsIndicators: false) {
+                    VStack {
+                        ZStack {
+                            ForEach(Rover.allCases, id: \.self) { rover in
+                                Image(Images.getShapesBg(for: rover))
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(UIScreen.screenWidth, UIScreen.screenWidth * 1.255, .trailing)
+                                    .modifier(ClipAnimatedShape(rover: rover, selectedRover: selectedRover))
+                                    .onTapGesture {
+                                        withAnimation { selectedRover = rover }
+                                    }
                             }
-                        )
-                        .store(in: &self.viewModel.cancellable)
+                        }.padding(.top, 10)
                         
-                    
-                } label: {
-                    Text(Strings.fetchLabel)
-                        .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 15))
-                        .frame(UIScreen.screenWidth - 100, .infinity)
-                        .foregroundColor(Color.white)
-                        .padding()
+                        Text(Strings.fetchPhotoTitle.uppercased())
+                            .padding(.horizontal, Constants.offset)
+                            .padding(.top, 10)
+                            .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 12))
+                            .frame(UIScreen.screenWidth, .infinity, .leading)
+                            .foregroundColor(Color.init(hex: Colors.titleGray.rawValue))
+                        
+                        TabView(selection: $selectedRover.animation(.linear(duration: 0.15))) {
+                            ForEach(Rover.allCases, id: \.self) { rover in
+                                roverInfoView(for: rover)
+                            }
+                        }
+                        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                        .frame(UIScreen.screenWidth, 250, .leading)
+                        
+                        Spacer()
+                            .frame(height: 100)
+                    }
                 }
-                .background(Color.blue)
-                .frame(.infinity, 50, .bottom)
-                .clipCapsule()
-                .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: -3)
-                .padding(.horizontal, 50)
-                .padding(.bottom, 30)
+                
+                VStack {
+                    Spacer()
+                    
+                    NavigationLink(destination: photosView, isActive: $viewModel.routeToPhotosView) {}
+                    Button {
+                        self.viewModel.selectedRover = selectedRover
+                        viewModel.routeToPhotosView = true
+                    } label: {
+                        Text(Strings.fetchLabel)
+                            .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 15))
+                            .frame(UIScreen.screenWidth - 100, .infinity)
+                            .foregroundColor(Color.white)
+                            .padding()
+                    }
+                    .background(Color.blue)
+                    .frame(.infinity, 50, .bottom)
+                    .clipCapsule()
+                    .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: -3)
+                    .padding(.horizontal, 50)
+                    .padding(.bottom, 30)
+                }
             }
+            .ignoresSafeArea()
+            .navigationBarHidden(true)
         }
-        .ignoresSafeArea()
     }
     
     @ViewBuilder
-    func getRoverInfoView(for rover: Rover) -> some View {
+    func roverInfoView(for rover: Rover) -> some View {
         VStack {
             Text(rover.rawValue.uppercased())
                 .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 32))
@@ -105,7 +97,7 @@ struct RoverSelectionView: View {
                 .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 12))
                 .frame(UIScreen.screenWidth, .infinity, .leading)
                 .foregroundColor(Color.init(hex: Colors.titleGray.rawValue))
-              
+            
             Text(Strings.getMissionInfo(for: rover))
                 .padding(.horizontal, Constants.offset)
                 .padding(.top, 3)
@@ -136,6 +128,17 @@ struct RoverSelectionView: View {
         }
         .sheet(isPresented: $showSafari) {
             SafariView(url: Constants.getOficialSiteURL(for: rover))
+        }
+    }
+    
+    @ViewBuilder
+    var photosView: some View {
+        if let manifest = viewModel.manifest {
+            
+            let viewModel = RoverPhotoViewModel(manifest: manifest)
+            RoverPhotosView()//viewModel: viewModel)
+        } else {
+            Text("Something went wrong!")
         }
     }
 }

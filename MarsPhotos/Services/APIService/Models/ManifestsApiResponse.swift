@@ -23,9 +23,8 @@ struct Manifest: Codable {
 }
 
 extension Manifest {
-    var rover: Rover { Rover(rawValue: name) ?? .opportunity}
+    var rover: Rover { Rover(rawValue: name.lowercased()) ?? .opportunity}
 }
-
 
 struct ManifestPhoto: Codable {
     let sol: Int

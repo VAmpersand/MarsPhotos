@@ -10,4 +10,6 @@ import Foundation
 enum Fonts: String {
     case latoHeavy = "Lato-Heavy"
     case abrilFatface = "AbrilFatface-Regular"
+    case pingFang = "PingFang-SC-Regular"
+    
 }
