@@ -22,6 +22,11 @@ struct Manifest: Codable {
     let photos: [ManifestPhoto]
 }
 
+extension Manifest {
+    var rover: Rover { Rover(rawValue: name) ?? .opportunity}
+}
+
+
 struct ManifestPhoto: Codable {
     let sol: Int
     let earthDate: String

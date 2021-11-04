@@ -12,6 +12,7 @@ import PureSwiftUI
 struct RoverSelectionView: View {
     
     @ObservedObject var viewModel = RoverSelectionViewModel()
+    @EnvironmentObject var appRouter: AppRouter
     
     @State private var selectedRover: Rover = .opportunity
     @State private var showSafari = false
@@ -22,7 +23,7 @@ struct RoverSelectionView: View {
                 VStack {
                     ZStack {
                         ForEach(Rover.allCases, id: \.self) { rover in
-                            Image(rover.rawValue)
+                            Image(Images.getShapesBg(for: rover))
                                 .resizable()
                                 .scaledToFill()
                                 .frame(UIScreen.screenWidth, UIScreen.screenWidth * 1.255, .trailing)
@@ -33,7 +34,7 @@ struct RoverSelectionView: View {
                         }
                     }.padding(.top, 10)
                     
-                    Text(Strings.roverTitle.uppercased())
+                    Text(Strings.fetchPhotoTitle.uppercased())
                         .padding(.horizontal, Constants.offset)
                         .padding(.top, 10)
                         .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 12))
@@ -59,8 +60,20 @@ struct RoverSelectionView: View {
                 Button {
                     self.viewModel.selectedRover = self.selectedRover
                     
+                    self.viewModel.manifest.publisher
+                        .sink(
+                           receiveValue: { manifest in
+//                               guard let manifest = manifest else { return }
+                               
+                               
+                               self.viewModel.router.routeToRoverPhotos(manifest: manifest)
+                            }
+                        )
+                        .store(in: &self.viewModel.cancellable)
+                        
+                    
                 } label: {
-                    Text("Fetch")
+                    Text(Strings.fetchLabel)
                         .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 15))
                         .frame(UIScreen.screenWidth - 100, .infinity)
                         .foregroundColor(Color.white)
@@ -80,8 +93,8 @@ struct RoverSelectionView: View {
     @ViewBuilder
     func getRoverInfoView(for rover: Rover) -> some View {
         VStack {
-            Text(rover.rawValue.firstUppercased)
-                .font(Font.custom(Fonts.abrilFatface.rawValue, fixedSize: 32))
+            Text(rover.rawValue.uppercased())
+                .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 32))
                 .padding(.horizontal, Constants.offset)
                 .padding(.bottom, 10)
                 .frame(UIScreen.screenWidth, .infinity, .leading)

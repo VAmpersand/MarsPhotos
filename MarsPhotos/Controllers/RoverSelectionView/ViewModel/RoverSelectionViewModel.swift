@@ -10,19 +10,19 @@ import Combine
 
 final class RoverSelectionViewModel: ObservableObject, NasaAPIService {
     var apiSession: APIService
+    var router: RoutingService
     
-    init(apiSession: APIService = APISession()) {
+    init(apiSession: APIService = APISession(), router: RoutingService = AppRouter()) {
         self.apiSession = apiSession
+        self.router = router
         
         subscribe()
     }
     
-    private var cancellable: Set<AnyCancellable> = []
-    
+    var cancellable: Set<AnyCancellable> = []
+
     @Published var selectedRover: Rover = .opportunity
-    @Published var photos: [Photo] = []
-    @Published var manifest: ManifestsApiResponse?
-    
+    @Published var manifest: Manifest?
 }
 
 extension RoverSelectionViewModel {
@@ -42,19 +42,32 @@ extension RoverSelectionViewModel {
                     }
                 },
                 receiveValue: { [unowned self] manifest in
-                    self.manifest = manifest
-                    print(self.manifest)
+                    self.manifest = manifest.photoManifest
                 }
             )
             .store(in: &cancellable)
+        
+//        $manifest
+//            .sink(
+//               receiveValue: { [unowned self] manifest in
+//                   guard let manifest = manifest else { return }
+//                   
+////                   self.appRouter.state = .roverPhotosView(manifest: manifest)
+////                   self.routingService.routeToRoverPhotos(manifest: manifest)
+//                }
+//            )
+//            .store(in: &cancellable)
+        
+        //            .flatMap { [unowned self] (manifest: Manifest?) -> () in
+//
+//            }
+//            .flatMap { [unowned self] (manifest: ManifestsApiResponse?) -> AnyPublisher<PhotosApiResponse, APIError> in
+//                guard let sol = manifest?.photoManifest.maxSol,
+//                      let rover = Rover(rawValue: manifest?.photoManifest.name ?? "") else {
+//                          return Fail(error: APIError.unknown).eraseToAnyPublisher()
+//                      }
+//
+//                return self.getPhoto(for: sol, from: rover)
+//            }
     }
-}
-
-extension Publisher {
-  func genericError() -> AnyPublisher<Self.Output, APIError> {
-    return self
-      .mapError({ (error: Self.Failure) -> APIError in
-          return APIError.unknown
-      }).eraseToAnyPublisher()
-  }
 }

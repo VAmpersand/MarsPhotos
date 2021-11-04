@@ -33,6 +33,10 @@
 		777C413527312C2A0031FF43 /* ManifestsApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C413427312C2A0031FF43 /* ManifestsApiResponse.swift */; };
 		777C41382732564F0031FF43 /* Rover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C41372732564F0031FF43 /* Rover.swift */; };
 		777C413A273256F00031FF43 /* NasaAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C4139273256F00031FF43 /* NasaAPIService.swift */; };
+		777C413E2733894D0031FF43 /* RoverPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C413D2733894D0031FF43 /* RoverPhotosView.swift */; };
+		777C4141273389680031FF43 /* RoverPhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C4140273389680031FF43 /* RoverPhotoViewModel.swift */; };
+		777C41432733908F0031FF43 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C41422733908F0031FF43 /* Images.swift */; };
+		777C414627339EA70031FF43 /* RoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C414527339EA70031FF43 /* RoutingService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +67,10 @@
 		777C413427312C2A0031FF43 /* ManifestsApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManifestsApiResponse.swift; sourceTree = "<group>"; };
 		777C41372732564F0031FF43 /* Rover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rover.swift; sourceTree = "<group>"; };
 		777C4139273256F00031FF43 /* NasaAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaAPIService.swift; sourceTree = "<group>"; };
+		777C413D2733894D0031FF43 /* RoverPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverPhotosView.swift; sourceTree = "<group>"; };
+		777C4140273389680031FF43 /* RoverPhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverPhotoViewModel.swift; sourceTree = "<group>"; };
+		777C41422733908F0031FF43 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		777C414527339EA70031FF43 /* RoutingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +178,7 @@
 				77586BDD272AB33A00C0564C /* Fonts.swift */,
 				77586BDF272AB3F500C0564C /* Colors.swift */,
 				77586BE1272BBD4600C0564C /* Strings.swift */,
+				777C41422733908F0031FF43 /* Images.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -216,6 +225,7 @@
 			children = (
 				775668C52722D4CA009EBD42 /* APIService */,
 				777C413B273259780031FF43 /* NasaAPIService */,
+				777C414427339E800031FF43 /* RoutingService */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -223,6 +233,7 @@
 		777C413027311E2C0031FF43 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				777C413C273389150031FF43 /* RoverPhotosView */,
 				775668C12722D459009EBD42 /* RoverSelectionView */,
 				777C413127311E4F0031FF43 /* SafariView.swift */,
 			);
@@ -244,6 +255,31 @@
 				777C4139273256F00031FF43 /* NasaAPIService.swift */,
 			);
 			path = NasaAPIService;
+			sourceTree = "<group>";
+		};
+		777C413C273389150031FF43 /* RoverPhotosView */ = {
+			isa = PBXGroup;
+			children = (
+				777C413F273389580031FF43 /* ViewModel */,
+				777C413D2733894D0031FF43 /* RoverPhotosView.swift */,
+			);
+			path = RoverPhotosView;
+			sourceTree = "<group>";
+		};
+		777C413F273389580031FF43 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				777C4140273389680031FF43 /* RoverPhotoViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		777C414427339E800031FF43 /* RoutingService */ = {
+			isa = PBXGroup;
+			children = (
+				777C414527339EA70031FF43 /* RoutingService.swift */,
+			);
+			path = RoutingService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,6 +360,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				777C414627339EA70031FF43 /* RoutingService.swift in Sources */,
 				777C41382732564F0031FF43 /* Rover.swift in Sources */,
 				775668CE27242893009EBD42 /* APIError.swift in Sources */,
 				775668E1272824DF009EBD42 /* Constants.swift in Sources */,
@@ -332,10 +369,12 @@
 				775668D127242AEA009EBD42 /* RoverSelectionViewModel.swift in Sources */,
 				775668D727258380009EBD42 /* CuriositySegment.swift in Sources */,
 				775668B32722D1C2009EBD42 /* MarsPhotosApp.swift in Sources */,
+				777C413E2733894D0031FF43 /* RoverPhotosView.swift in Sources */,
 				77586BE2272BBD4600C0564C /* Strings.swift in Sources */,
 				77586BE6272C0A3D00C0564C /* NasaAPIEndpoint.swift in Sources */,
 				77586BEA272EEDD000C0564C /* String + extensions.swift in Sources */,
 				77586BDC272AAF4800C0564C /* Color + extensions.swift in Sources */,
+				777C41432733908F0031FF43 /* Images.swift in Sources */,
 				777C413A273256F00031FF43 /* NasaAPIService.swift in Sources */,
 				777C413227311E500031FF43 /* SafariView.swift in Sources */,
 				775668DF2728206B009EBD42 /* SpiritSegemnt.swift in Sources */,
@@ -343,6 +382,7 @@
 				775668D527243577009EBD42 /* OpportunitySegment.swift in Sources */,
 				775668C82722D4E5009EBD42 /* APISession.swift in Sources */,
 				775668CB2722D9BA009EBD42 /* PhotosApiResponse.swift in Sources */,
+				777C4141273389680031FF43 /* RoverPhotoViewModel.swift in Sources */,
 				775668C32722D4B3009EBD42 /* RoverSelectionView.swift in Sources */,
 				777C413527312C2A0031FF43 /* ManifestsApiResponse.swift in Sources */,
 			);

@@ -9,9 +9,11 @@ import Foundation
 
 struct Strings {
     static let missionTitle = "Mission"
-    static let roverTitle = "Fetch photo from rover"
+    static let fetchPhotoTitle = "Fetch photo from rover"
+    static let roverTitle = "Nasa Mars rover"
     
     static let moreLabel = "More"
+    static let fetchLabel = "Fetch"
     
     static func getMissionInfo(for rover: Rover) -> String {
         switch rover {
