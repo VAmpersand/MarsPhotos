@@ -44,7 +44,13 @@ struct RoverSelectionView: View {
                         
                         TabView(selection: $selectedRover.animation(.linear(duration: 0.15))) {
                             ForEach(Rover.allCases, id: \.self) { rover in
-                                roverInfoView(for: rover)
+                                RoverInfoView(rover: rover)
+                                    .onTapGesture {
+                                        self.showSafari = true
+                                    }
+                                    .sheet(isPresented: $showSafari) {
+                                        SafariView(url: Constants.getOficialSiteURL(for: rover))
+                                    }
                             }
                         }
                         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -81,9 +87,24 @@ struct RoverSelectionView: View {
             .navigationBarHidden(true)
         }
     }
-    
+
     @ViewBuilder
-    func roverInfoView(for rover: Rover) -> some View {
+    var photosView: some View {
+        if let manifest = viewModel.manifest {
+            
+            let viewModel = RoverPhotoViewModel(manifest: manifest)
+            RoverPhotosView()//viewModel: viewModel)
+        } else {
+            Text("Something went wrong!")
+        }
+    }
+}
+
+// MARK: - RoverInfoView
+struct RoverInfoView: View {
+    var rover: Rover
+    
+    var body: some View {
         VStack {
             Text(rover.rawValue.uppercased())
                 .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 32))
@@ -122,23 +143,6 @@ struct RoverSelectionView: View {
             }
             .padding(.horizontal, Constants.offset)
             .frame(UIScreen.screenWidth, 32, .trailing)
-        }
-        .onTapGesture {
-            self.showSafari = true
-        }
-        .sheet(isPresented: $showSafari) {
-            SafariView(url: Constants.getOficialSiteURL(for: rover))
-        }
-    }
-    
-    @ViewBuilder
-    var photosView: some View {
-        if let manifest = viewModel.manifest {
-            
-            let viewModel = RoverPhotoViewModel(manifest: manifest)
-            RoverPhotosView()//viewModel: viewModel)
-        } else {
-            Text("Something went wrong!")
         }
     }
 }

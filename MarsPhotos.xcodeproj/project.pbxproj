@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		772FF9B42735083E006E3AAE /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 772FF9B32735083E006E3AAE /* PureSwiftUI */; };
 		775668B32722D1C2009EBD42 /* MarsPhotosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668B22722D1C2009EBD42 /* MarsPhotosApp.swift */; };
 		775668B72722D1C5009EBD42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 775668B62722D1C5009EBD42 /* Assets.xcassets */; };
 		775668BA2722D1C5009EBD42 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 775668B92722D1C5009EBD42 /* Preview Assets.xcassets */; };
@@ -28,7 +29,6 @@
 		77586BE2272BBD4600C0564C /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77586BE1272BBD4600C0564C /* Strings.swift */; };
 		77586BE6272C0A3D00C0564C /* NasaAPIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77586BE5272C0A3D00C0564C /* NasaAPIEndpoint.swift */; };
 		77586BEA272EEDD000C0564C /* String + extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77586BE9272EEDD000C0564C /* String + extensions.swift */; };
-		777C412F27310B430031FF43 /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 777C412E27310B430031FF43 /* PureSwiftUI */; };
 		777C413227311E500031FF43 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C413127311E4F0031FF43 /* SafariView.swift */; };
 		777C413527312C2A0031FF43 /* ManifestsApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C413427312C2A0031FF43 /* ManifestsApiResponse.swift */; };
 		777C41382732564F0031FF43 /* Rover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C41372732564F0031FF43 /* Rover.swift */; };
@@ -81,7 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				777C412F27310B430031FF43 /* PureSwiftUI in Frameworks */,
+				772FF9B42735083E006E3AAE /* PureSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,7 +304,7 @@
 			);
 			name = MarsPhotos;
 			packageProductDependencies = (
-				777C412E27310B430031FF43 /* PureSwiftUI */,
+				772FF9B32735083E006E3AAE /* PureSwiftUI */,
 			);
 			productName = MarsPhotos;
 			productReference = 775668AF2722D1C1009EBD42 /* MarsPhotos.app */;
@@ -335,7 +335,7 @@
 			);
 			mainGroup = 775668A62722D1C1009EBD42;
 			packageReferences = (
-				777C412D27310B430031FF43 /* XCRemoteSwiftPackageReference "pure-swift-ui" */,
+				772FF9B22735083E006E3AAE /* XCRemoteSwiftPackageReference "pure-swift-ui" */,
 			);
 			productRefGroup = 775668B02722D1C1009EBD42 /* Products */;
 			projectDirPath = "";
@@ -599,7 +599,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		777C412D27310B430031FF43 /* XCRemoteSwiftPackageReference "pure-swift-ui" */ = {
+		772FF9B22735083E006E3AAE /* XCRemoteSwiftPackageReference "pure-swift-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/CodeSlicing/pure-swift-ui.git";
 			requirement = {
@@ -610,9 +610,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		777C412E27310B430031FF43 /* PureSwiftUI */ = {
+		772FF9B32735083E006E3AAE /* PureSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 777C412D27310B430031FF43 /* XCRemoteSwiftPackageReference "pure-swift-ui" */;
+			package = 772FF9B22735083E006E3AAE /* XCRemoteSwiftPackageReference "pure-swift-ui" */;
 			productName = PureSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */

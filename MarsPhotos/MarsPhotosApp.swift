@@ -12,7 +12,7 @@ struct MarsPhotosApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RoverPhotosView()
+            RoverSelectionView()
         }
     }
 }

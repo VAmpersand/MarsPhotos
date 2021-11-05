@@ -15,7 +15,7 @@ struct RoverPhotosView: View {
     @State var offset: CGFloat = 0
     @State var lastOffset: CGFloat = 0
     @GestureState var gestureOffset: CGFloat = 0
-        
+    
     var body: some View {
         ZStack(alignment: .center) {
             GeometryReader { proxy in
@@ -26,23 +26,9 @@ struct RoverPhotosView: View {
                     .resizedToFill()
                     .frame(frame.width, frame.height)
                 
-                VStack(spacing: 10) {
-                    Text("self.viewModel.manifest.name".uppercased())
-                        .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 32))
-                        .padding(.horizontal, Constants.offset)
-                        .frame(frame.width, .infinity, .leading)
-                        .foregroundColor(.white)
-                    
-                    Text(Strings.roverTitle)
-                        .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 18))
-                        .padding(.horizontal, Constants.offset)
-                        .frame(frame.width, .infinity, .leading)
-                        .foregroundColor(.white)
-                    
-                    Spacer()
-                }
-                .yOffset(80)
-                .shadow(color: .black, radius: 5, x: 3, y: 3)
+                RoverTitleView(frame: frame)
+                    .yOffset(getTitelOffset())
+                    .shadow(color: .black, radius: 5, x: 3, y: 3)
                 
                 VStack {
                     Spacer()
@@ -50,21 +36,14 @@ struct RoverPhotosView: View {
                     
                     GeometryReader { proxy in
                         let height = proxy.frame(in: .global).height
-                        let maxHeight = height - 60
+                        let midHeight = height - 300
+                        let maxHeight = height - 80
                         
-                        HStack {
-                            Spacer()
-                            infoView(for: 2452, title: "Day")
-                            Spacer()
-                            infoView(for: 1234, title: "Sol")
-                            Spacer()
-                            infoView(for: 14233, title: "Photos")
-                            Spacer()
-                        }
-                        .yOffset(height - 150)
-                        .yOffset(-offset > 0
-                                  ? (-offset <= (maxHeight / 2) ? offset : -(maxHeight / 2))
-                                  : 0)
+                        ManifestInfoView()
+                            .yOffset(height - 150)
+                            .yOffset(-offset > 0
+                                      ? (-offset <= (midHeight) ? offset : -(midHeight))
+                                      : 0)
                         
                         PhotosView()
                             .yOffset(height - 60)
@@ -81,10 +60,10 @@ struct RoverPhotosView: View {
                                 })
                                     .onEnded { value in
                                         withAnimation {
-                                            if -offset > 100 && -offset < maxHeight / 2 {
-                                                offset = -maxHeight / 2
+                                            if -offset > 100 && -offset < midHeight {
+                                                offset = -midHeight
                                                 
-                                            } else if -offset > maxHeight / 2 {
+                                            } else if -offset > midHeight {
                                                 offset = -maxHeight
                                                 
                                             } else {
@@ -102,6 +81,66 @@ struct RoverPhotosView: View {
         }
     }
     
+    
+    func onChanged() {
+        DispatchQueue.main.async {
+            self.offset = gestureOffset + lastOffset
+        }
+    }
+    
+    func getChangingProgress() -> CGFloat {
+        let progress = 0.95 - (offset / (UIScreen.screenHeight / 2) * 0.1)
+        return progress < 0.95 ? 0.95 : (progress > 1 ? 1 : progress)
+    }
+    
+    func getTitelOffset() -> CGFloat {
+        let offset = 80 + (35 * (offset / UIScreen.screenHeight))
+        return offset > 80 ? 80 : (offset < 55 ? 55 : offset)
+    }
+}
+
+//MARK: - RoverTitleView
+struct RoverTitleView: View {
+    
+    //    var manifest: Manifest
+    var frame: CGRect
+    
+    var body: some View {
+        VStack(spacing: 10) {
+            Text("self.viewModel.manifest.name".uppercased())
+                .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 32))
+                .padding(.horizontal, Constants.offset)
+                .frame(frame.width, .infinity, .leading)
+                .foregroundColor(.white)
+            
+            Text(Strings.roverTitle)
+                .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 18))
+                .padding(.horizontal, Constants.offset)
+                .frame(frame.width, .infinity, .leading)
+                .foregroundColor(.white)
+            
+            Spacer()
+        }
+    }
+}
+
+// MARK: - ManifestInfoView
+struct ManifestInfoView: View {
+    
+    //    var manifest: Manifest
+    
+    var body: some View {
+        HStack {
+            Spacer()
+            infoView(for: 2452, title: "Day")
+            Spacer()
+            infoView(for: 1234, title: "Sol")
+            Spacer()
+            infoView(for: 14233, title: "Photos")
+            Spacer()
+        }
+    }
+    
     @ViewBuilder
     func infoView(for value: Int, title: String) -> some View {
         VStack {
@@ -116,25 +155,12 @@ struct RoverPhotosView: View {
         }
         .shadow(color: .black, radius: 5, x: 3, y: 3)
     }
-    
-    func onChanged() {
-        DispatchQueue.main.async {
-            self.offset = gestureOffset + lastOffset
-        }
-    }
-    
-    func getChangingProgress() -> CGFloat {
-        let progress = 0.95 - (offset / (UIScreen.screenHeight / 2) * 0.1)
-        return progress < 0.95 ? 0.95 : (progress > 1 ? 1 : progress)
-    }
-    
-//    func getTitelOffset() -> CGFloat {
-//        let porgress = -(offset / UIScreen.screenHeight)
-//    }
-//}
+}
+
 
 // MARK: - PhotosView
 struct PhotosView: View {
+    
     var body: some View {
         VStack {
             Capsule()
@@ -142,16 +168,41 @@ struct PhotosView: View {
                 .frame(120, 6)
                 .padding(.vertical, 11)
             
-            VStack {
-                Spacer()
+            ScrollView(showsIndicators: false) {
+                let colomnWidth = (UIScreen.screenWidth - 60) / 2
+                
+                ForEach((1...100), id: \.self) { item in
+                    HStack(spacing: 20) {
+                        VStack {
+                            photoView()
+                        }
+                        .width(colomnWidth)
+                        
+                        VStack {
+                            photoView()
+                        }
+                        .width(colomnWidth)
+                    }
+                }
             }
-            .frame(UIScreen.screenWidth - 36, .infinity)
-            .background(Color.gray.opacity(0.4))
+            .frame(UIScreen.screenWidth - 20, .infinity)
             .padding(.horizontal)
         }
         .frame(UIScreen.screenWidth, UIScreen.screenHeight - 60)
         .background(Color.white)
         .cornerRadius(20, corners: [.topLeft, .topRight])
+    }
+    
+    @ViewBuilder
+    func photoView() -> some View {
+        VStack {
+            Image(Images.getBg(for: [Rover.opportunity, Rover.curiosity, Rover.spirit].randomElement() ?? .opportunity))
+                .resizedToFill()
+                .cornerRadius(4)
+            
+            Spacer()
+                .frame(height: 20)
+        }
     }
 }
 
