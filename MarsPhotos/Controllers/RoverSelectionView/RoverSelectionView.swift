@@ -93,7 +93,7 @@ struct RoverSelectionView: View {
         if let manifest = viewModel.manifest {
             
             let viewModel = RoverPhotoViewModel(manifest: manifest)
-            RoverPhotosView()//viewModel: viewModel)
+            RoverPhotosView(viewModel: viewModel)
         } else {
             Text("Something went wrong!")
         }

@@ -10,5 +10,6 @@ import Foundation
 enum APIError: Error {
     case decodingError
     case httpError(Int)
+    case kingfisherError(String)
     case unknown
 }

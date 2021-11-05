@@ -11,7 +11,7 @@ import PureSwiftUI
 // MARK: - RoverPhotosView
 struct RoverPhotosView: View {
     
-    //    @ObservedObject var viewModel: RoverPhotoViewModel
+    @ObservedObject var viewModel: RoverPhotoViewModel
     @State var offset: CGFloat = 0
     @State var lastOffset: CGFloat = 0
     @GestureState var gestureOffset: CGFloat = 0
@@ -21,12 +21,12 @@ struct RoverPhotosView: View {
             GeometryReader { proxy in
                 let frame = proxy.frame(in: .global)
                 
-                Image(Images.getBg(for: .spirit)) // viewModel.manifest.rover))
+                Image(Images.getBg(for: viewModel.manifest.rover))
                     .resizable()
                     .resizedToFill()
                     .frame(frame.width, frame.height)
                 
-                RoverTitleView(frame: frame)
+                RoverTitleView(manifest: viewModel.manifest, frame: frame)
                     .yOffset(getTitelOffset())
                     .shadow(color: .black, radius: 5, x: 3, y: 3)
                 
@@ -39,13 +39,14 @@ struct RoverPhotosView: View {
                         let midHeight = height - 300
                         let maxHeight = height - 80
                         
-                        ManifestInfoView()
+                        ManifestInfoView(manifest: viewModel.manifest)
                             .yOffset(height - 150)
                             .yOffset(-offset > 0
                                       ? (-offset <= (midHeight) ? offset : -(midHeight))
                                       : 0)
                         
-                        PhotosView()
+                        PhotosView(rightColumn: viewModel.rightColumn,
+                                   leftColumn: viewModel.leftColumn)
                             .yOffset(height - 60)
                             .yOffset(-offset > 0
                                       ? (-offset <= maxHeight ? offset : -maxHeight)
@@ -102,12 +103,12 @@ struct RoverPhotosView: View {
 //MARK: - RoverTitleView
 struct RoverTitleView: View {
     
-    //    var manifest: Manifest
+    var manifest: Manifest
     var frame: CGRect
     
     var body: some View {
         VStack(spacing: 10) {
-            Text("self.viewModel.manifest.name".uppercased())
+            Text(manifest.name.uppercased())
                 .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 32))
                 .padding(.horizontal, Constants.offset)
                 .frame(frame.width, .infinity, .leading)
@@ -127,7 +128,7 @@ struct RoverTitleView: View {
 // MARK: - ManifestInfoView
 struct ManifestInfoView: View {
     
-    //    var manifest: Manifest
+    var manifest: Manifest
     
     var body: some View {
         HStack {
@@ -161,6 +162,9 @@ struct ManifestInfoView: View {
 // MARK: - PhotosView
 struct PhotosView: View {
     
+    var rightColumn: [RoverPhotoViewModel.PhotoData]
+    var leftColumn: [RoverPhotoViewModel.PhotoData]
+
     var body: some View {
         VStack {
             Capsule()
@@ -171,19 +175,25 @@ struct PhotosView: View {
             ScrollView(showsIndicators: false) {
                 let colomnWidth = (UIScreen.screenWidth - 60) / 2
                 
-                ForEach((1...100), id: \.self) { item in
-                    HStack(spacing: 20) {
-                        VStack {
-                            photoView()
+                HStack(alignment: .top) {
+                    VStack() {
+                        ForEach((0..<leftColumn.count), id: \.self) { index in
+                            photoView(image: leftColumn[index].image)
                         }
-                        .width(colomnWidth)
-                        
-                        VStack {
-                            photoView()
-                        }
-                        .width(colomnWidth)
                     }
+                    .frame(width: colomnWidth, alignment: .top)
+                    
+                    Spacer()
+                        .frame(width: 20)
+                    
+                    VStack {
+                        ForEach((0..<rightColumn.count), id: \.self) { index in
+                            photoView(image: rightColumn[index].image)
+                        }
+                    }
+                    .frame(width: colomnWidth, alignment: .top)
                 }
+                
             }
             .frame(UIScreen.screenWidth - 20, .infinity)
             .padding(.horizontal)
@@ -194,11 +204,12 @@ struct PhotosView: View {
     }
     
     @ViewBuilder
-    func photoView() -> some View {
+    func photoView(image: Image) -> some View {
         VStack {
-            Image(Images.getBg(for: [Rover.opportunity, Rover.curiosity, Rover.spirit].randomElement() ?? .opportunity))
-                .resizedToFill()
+            image
+                .resizedToFit()
                 .cornerRadius(4)
+                .clipped()
             
             Spacer()
                 .frame(height: 20)
@@ -206,9 +217,9 @@ struct PhotosView: View {
     }
 }
 
-// MARK: - RoverPhotosView_Previewer
-struct RoverPhotosView_Previewer: PreviewProvider {
-    static var previews: some View {
-        RoverPhotosView()
-    }
-}
+//// MARK: - RoverPhotosView_Previewer
+//struct RoverPhotosView_Previewer: PreviewProvider {
+//    static var previews: some View {
+//        RoverPhotosView()
+//    }
+//}

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		772FF9B42735083E006E3AAE /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 772FF9B32735083E006E3AAE /* PureSwiftUI */; };
+		772FF9B7273542BD006E3AAE /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 772FF9B6273542BD006E3AAE /* Kingfisher */; };
 		775668B32722D1C2009EBD42 /* MarsPhotosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668B22722D1C2009EBD42 /* MarsPhotosApp.swift */; };
 		775668B72722D1C5009EBD42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 775668B62722D1C5009EBD42 /* Assets.xcassets */; };
 		775668BA2722D1C5009EBD42 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 775668B92722D1C5009EBD42 /* Preview Assets.xcassets */; };
@@ -81,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				772FF9B7273542BD006E3AAE /* Kingfisher in Frameworks */,
 				772FF9B42735083E006E3AAE /* PureSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -305,6 +307,7 @@
 			name = MarsPhotos;
 			packageProductDependencies = (
 				772FF9B32735083E006E3AAE /* PureSwiftUI */,
+				772FF9B6273542BD006E3AAE /* Kingfisher */,
 			);
 			productName = MarsPhotos;
 			productReference = 775668AF2722D1C1009EBD42 /* MarsPhotos.app */;
@@ -336,6 +339,7 @@
 			mainGroup = 775668A62722D1C1009EBD42;
 			packageReferences = (
 				772FF9B22735083E006E3AAE /* XCRemoteSwiftPackageReference "pure-swift-ui" */,
+				772FF9B5273542BD006E3AAE /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 775668B02722D1C1009EBD42 /* Products */;
 			projectDirPath = "";
@@ -607,6 +611,14 @@
 				kind = branch;
 			};
 		};
+		772FF9B5273542BD006E3AAE /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -614,6 +626,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 772FF9B22735083E006E3AAE /* XCRemoteSwiftPackageReference "pure-swift-ui" */;
 			productName = PureSwiftUI;
+		};
+		772FF9B6273542BD006E3AAE /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 772FF9B5273542BD006E3AAE /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
