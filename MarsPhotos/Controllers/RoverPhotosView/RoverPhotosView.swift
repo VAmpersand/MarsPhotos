@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PureSwiftUI
+import Kingfisher
 
 // MARK: - RoverPhotosView
 struct RoverPhotosView: View {
@@ -45,8 +46,7 @@ struct RoverPhotosView: View {
                                       ? (-offset <= (midHeight) ? offset : -(midHeight))
                                       : 0)
                         
-                        PhotosView(rightColumn: viewModel.rightColumn,
-                                   leftColumn: viewModel.leftColumn)
+                        PhotosView(photos: viewModel.photos)
                             .yOffset(height - 60)
                             .yOffset(-offset > 0
                                       ? (-offset <= maxHeight ? offset : -maxHeight)
@@ -162,8 +162,7 @@ struct ManifestInfoView: View {
 // MARK: - PhotosView
 struct PhotosView: View {
     
-    var rightColumn: [RoverPhotoViewModel.PhotoData]
-    var leftColumn: [RoverPhotoViewModel.PhotoData]
+    var photos: [Photo]
 
     var body: some View {
         VStack {
@@ -177,8 +176,8 @@ struct PhotosView: View {
                 
                 HStack(alignment: .top) {
                     VStack() {
-                        ForEach((0..<leftColumn.count), id: \.self) { index in
-                            photoView(image: leftColumn[index].image)
+                        ForEach((0..<photos.count), id: \.self) { index in
+                            photoView(photo: photos[index])
                         }
                     }
                     .frame(width: colomnWidth, alignment: .top)
@@ -187,8 +186,8 @@ struct PhotosView: View {
                         .frame(width: 20)
                     
                     VStack {
-                        ForEach((0..<rightColumn.count), id: \.self) { index in
-                            photoView(image: rightColumn[index].image)
+                        ForEach((0..<photos.count), id: \.self) { index in
+                            photoView(photo: photos[index])
                         }
                     }
                     .frame(width: colomnWidth, alignment: .top)
@@ -204,12 +203,16 @@ struct PhotosView: View {
     }
     
     @ViewBuilder
-    func photoView(image: Image) -> some View {
+    func photoView(photo: Photo) -> some View {
         VStack {
-            image
-                .resizedToFit()
+            KFImage(URL(string: photo.imgSrc))
+                .loadDiskFileSynchronously()
+                .cacheMemoryOnly()
+                .fade(duration: 1)
+                .resizable()
+                .scaledToFit()
                 .cornerRadius(4)
-                .clipped()
+//                .clipped()
             
             Spacer()
                 .frame(height: 20)
