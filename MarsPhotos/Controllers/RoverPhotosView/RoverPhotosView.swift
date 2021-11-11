@@ -18,66 +18,74 @@ struct RoverPhotosView: View {
     @GestureState var gestureOffset: CGFloat = 0
     
     var body: some View {
-        ZStack(alignment: .center) {
-            GeometryReader { proxy in
-                let frame = proxy.frame(in: .global)
-                
-                Image(Images.getBg(for: viewModel.manifest.rover))
-                    .resizable()
-                    .resizedToFill()
-                    .frame(frame.width, frame.height)
-                
-                RoverTitleView(manifest: viewModel.manifest, frame: frame)
-                    .yOffset(getTitelOffset())
-                    .shadow(color: .black, radius: 5, x: 3, y: 3)
-                
-                VStack {
-                    Spacer()
-                        .frame(height: 80)
+        NavigationView {
+            ZStack(alignment: .center) {
+                GeometryReader { proxy in
+                    let frame = proxy.frame(in: .global)
                     
-                    GeometryReader { proxy in
-                        let height = proxy.frame(in: .global).height
-                        let midHeight = height - 300
-                        let maxHeight = height - 80
+                    Image(Images.getBg(for: viewModel.manifest.rover))
+                        .resizable()
+                        .resizedToFill()
+                        .frame(frame.width, frame.height)
+                    
+                    RoverTitleView(manifest: viewModel.manifest, frame: frame)
+                        .yOffset(getTitelOffset())
+                        .shadow(color: .black, radius: 5, x: 3, y: 3)
+                    
+                    VStack {
+                        Spacer()
+                            .frame(height: 80)
                         
-                        ManifestInfoView(manifest: viewModel.manifest)
-                            .yOffset(height - 150)
-                            .yOffset(-offset > 0
-                                      ? (-offset <= (midHeight) ? offset : -(midHeight))
-                                      : 0)
-                        
-                        PhotosView(photos: viewModel.photos)
-                            .yOffset(height - 60)
-                            .yOffset(-offset > 0
-                                      ? (-offset <= maxHeight ? offset : -maxHeight)
-                                      : 0)
-                            .scale(getChangingProgress())
-                            .opacity(Double(getChangingProgress()))
-                            .gesture(
-                                DragGesture().updating($gestureOffset, body: { value, output, _ in
-                                    output = value.translation.height
-                                    
-                                    onChanged()
-                                })
-                                    .onEnded { value in
-                                        withAnimation {
-                                            if -offset > 100 && -offset < midHeight {
-                                                offset = -midHeight
-                                                
-                                            } else if -offset > midHeight {
-                                                offset = -maxHeight
-                                                
-                                            } else {
-                                                offset = 0
+                        GeometryReader { proxy in
+                            let height = proxy.frame(in: .global).height
+                            let maxHeight = height - 120
+                            let midHeight = maxHeight - 220
+                            
+                            ManifestInfoView(manifest: viewModel.manifest)
+                                .yOffset(height - 190)
+                                .yOffset(-offset > 0
+                                          ? (-offset <= (midHeight) ? offset : -(midHeight))
+                                          : 0)
+                            
+                            PhotosView(leftColumn: viewModel.leftColumnPhotos, rightColumn: viewModel.rightColumnPhotos)
+                                .yOffset(height - 100)
+                                .yOffset(-offset > 0
+                                          ? (-offset < maxHeight ? offset : -maxHeight)
+                                          : 0)
+                                .scale(getChangingProgress())
+                                .opacity(Double(getChangingProgress()))
+                                .gesture(
+                                    DragGesture()
+                                        .updating($gestureOffset, body: { value, output, _ in
+                                            output = value.translation.height
+                                            
+                                            onChanged()
+                                        })
+                                        .onEnded { value in
+                                            withAnimation {
+                                                if -offset > 100 && -offset < midHeight {
+                                                    offset = -midHeight
+                                                    
+                                                } else if -offset > midHeight {
+                                                    offset = -maxHeight
+                                                    
+                                                } else {
+                                                    offset = 0
+                                                }
                                             }
+                                            
+                                            lastOffset = offset
                                         }
-                                        print(offset)
-                                        lastOffset = offset
-                                    }
-                            )
+                                )
+                        }
                     }
                 }
             }
+            .onAppear {
+                self.navBarPrefs.navBarIsHidden = true
+            }
+            .navigationBarHidden(true)
+            .navigationBarTitleDisplayMode(.inline)
             .ignoresSafeArea()
         }
     }
@@ -162,8 +170,9 @@ struct ManifestInfoView: View {
 // MARK: - PhotosView
 struct PhotosView: View {
     
-    var photos: [Photo]
-
+    var leftColumn: [Photo]
+    var rightColumn: [Photo]
+    
     var body: some View {
         VStack {
             Capsule()
@@ -176,8 +185,8 @@ struct PhotosView: View {
                 
                 HStack(alignment: .top) {
                     VStack() {
-                        ForEach((0..<photos.count), id: \.self) { index in
-                            photoView(photo: photos[index])
+                        ForEach((0..<leftColumn.count), id: \.self) { index in
+                            photoView(photo: leftColumn[index])
                         }
                     }
                     .frame(width: colomnWidth, alignment: .top)
@@ -186,8 +195,8 @@ struct PhotosView: View {
                         .frame(width: 20)
                     
                     VStack {
-                        ForEach((0..<photos.count), id: \.self) { index in
-                            photoView(photo: photos[index])
+                        ForEach((0..<rightColumn.count), id: \.self) { index in
+                            photoView(photo: rightColumn[index])
                         }
                     }
                     .frame(width: colomnWidth, alignment: .top)
@@ -196,10 +205,12 @@ struct PhotosView: View {
             }
             .frame(UIScreen.screenWidth - 20, .infinity)
             .padding(.horizontal)
+            .clipped()
         }
         .frame(UIScreen.screenWidth, UIScreen.screenHeight - 60)
         .background(Color.white)
         .cornerRadius(20, corners: [.topLeft, .topRight])
+        .contentShape(20, corners: [.topLeft, .topRight])
     }
     
     @ViewBuilder
@@ -212,7 +223,6 @@ struct PhotosView: View {
                 .resizable()
                 .scaledToFit()
                 .cornerRadius(4)
-//                .clipped()
             
             Spacer()
                 .frame(height: 20)
