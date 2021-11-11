@@ -12,9 +12,9 @@ import Kingfisher
 final class RoverPhotoViewModel: ObservableObject, NasaAPIService {
     var apiSession: APIService
     
-    init(manifest: Manifest, apiSession: APIService = APISession()) {
+    init(selectedRover: Rover, apiSession: APIService = APISession()) {
+        self.selectedRover = selectedRover
         self.apiSession = apiSession
-        self.manifest = manifest
         
         subscribe()
     }
@@ -27,7 +27,8 @@ final class RoverPhotoViewModel: ObservableObject, NasaAPIService {
     private var rightColumnHeight: CGFloat = 0
     private var leftColumnHeight: CGFloat = 0
     
-    @Published var manifest: Manifest
+    @Published var selectedRover: Rover
+    @Published var manifest: Manifest?
     @Published var rightColumnPhotos: [Photo] = []
     @Published var leftColumnPhotos: [Photo] = []
 }
@@ -35,8 +36,33 @@ final class RoverPhotoViewModel: ObservableObject, NasaAPIService {
 extension RoverPhotoViewModel {
     func subscribe() {
         
+        $selectedRover
+            .setFailureType(to: APIError.self)
+            .flatMap { [unowned self] (rover: Rover) -> AnyPublisher<ManifestsApiResponse, APIError> in
+                return self.getManifest(for: rover)
+            }
+            .sink(
+                receiveCompletion: { result in
+                    switch result {
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    case .finished: return
+                    }
+                },
+                receiveValue: { [unowned self] manifest in
+                    self.manifest = manifest.photoManifest
+                }
+            )
+            .store(in: &cancellable)
+        
         $manifest
-            .flatMap { [unowned self] (manifest: Manifest) -> AnyPublisher<PhotosApiResponse, APIError> in
+            .dropFirst()
+            .setFailureType(to: APIError.self)
+            .flatMap { [unowned self] (manifest: Manifest?) -> AnyPublisher<PhotosApiResponse, APIError> in
+                guard let manifest = manifest else {
+                    return Fail(error: APIError.unknown).eraseToAnyPublisher()
+                }
+                
                 return self.getPhoto(for: manifest.maxSol, from: manifest.rover)
             }
             .sink(

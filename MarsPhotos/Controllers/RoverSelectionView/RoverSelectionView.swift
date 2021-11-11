@@ -90,13 +90,11 @@ struct RoverSelectionView: View {
 
     @ViewBuilder
     var photosView: some View {
-        if let manifest = viewModel.manifest {
-            
-            let viewModel = RoverPhotoViewModel(manifest: manifest)
-            RoverPhotosView(viewModel: viewModel)
-        } else {
-            Text("Something went wrong!")
-        }
+        let viewModel = RoverPhotoViewModel(selectedRover: viewModel.selectedRover)
+        RoverPhotosView(viewModel: viewModel)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarHidden(true)
+            .navigationBarTitleDisplayMode(.inline)
     }
 }
 

@@ -16,6 +16,7 @@ struct RoverPhotosView: View {
     @State var offset: CGFloat = 0
     @State var lastOffset: CGFloat = 0
     @GestureState var gestureOffset: CGFloat = 0
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationView {
@@ -23,14 +24,29 @@ struct RoverPhotosView: View {
                 GeometryReader { proxy in
                     let frame = proxy.frame(in: .global)
                     
-                    Image(Images.getBg(for: viewModel.manifest.rover))
+                    Image(Images.getBg(for: viewModel.selectedRover))
                         .resizable()
                         .resizedToFill()
                         .frame(frame.width, frame.height)
                     
-                    RoverTitleView(manifest: viewModel.manifest, frame: frame)
-                        .yOffset(getTitelOffset())
-                        .shadow(color: .black, radius: 5, x: 3, y: 3)
+                    HStack(alignment: .top) {
+                        RoverTitleView(rover: viewModel.selectedRover, frame: frame)
+                        
+                        Button {
+                            self.presentationMode.wrappedValue.dismiss()
+                            
+                        } label: {
+                            Image(systemName: "xmark")
+                                .renderingMode(.template)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(20)
+                                .padding(.top, Constants.offset / 2)
+                                .foregroundColor(.white)
+                        }
+                    }
+                    .yOffset(getTitelOffset())
+                    .shadow(color: .black, radius: 5, x: 3, y: 3)
                     
                     VStack {
                         Spacer()
@@ -81,12 +97,10 @@ struct RoverPhotosView: View {
                     }
                 }
             }
-            .onAppear {
-                self.navBarPrefs.navBarIsHidden = true
-            }
+            .ignoresSafeArea()
+            .navigationBarBackButtonHidden(true)
             .navigationBarHidden(true)
             .navigationBarTitleDisplayMode(.inline)
-            .ignoresSafeArea()
         }
     }
     
@@ -111,21 +125,21 @@ struct RoverPhotosView: View {
 //MARK: - RoverTitleView
 struct RoverTitleView: View {
     
-    var manifest: Manifest
+    var rover: Rover
     var frame: CGRect
     
     var body: some View {
         VStack(spacing: 10) {
-            Text(manifest.name.uppercased())
+            Text((rover.rawValue).uppercased())
                 .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 32))
                 .padding(.horizontal, Constants.offset)
-                .frame(frame.width, .infinity, .leading)
+                .frame(frame.width - 50, .infinity, .leading)
                 .foregroundColor(.white)
             
             Text(Strings.roverTitle)
                 .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 18))
                 .padding(.horizontal, Constants.offset)
-                .frame(frame.width, .infinity, .leading)
+                .frame(frame.width - 50, .infinity, .leading)
                 .foregroundColor(.white)
             
             Spacer()
@@ -136,7 +150,7 @@ struct RoverTitleView: View {
 // MARK: - ManifestInfoView
 struct ManifestInfoView: View {
     
-    var manifest: Manifest
+    var manifest: Manifest?
     
     var body: some View {
         HStack {

@@ -27,25 +27,25 @@ final class RoverSelectionViewModel: ObservableObject, NasaAPIService {
 extension RoverSelectionViewModel {
     func subscribe() {
         
-        $selectedRover
-            .dropFirst()
-            .setFailureType(to: APIError.self)
-            .flatMap { [unowned self] (rover: Rover) -> AnyPublisher<ManifestsApiResponse, APIError> in
-                return self.getManifest(for: rover)
-            }
-            .sink(
-                receiveCompletion: { result in
-                    switch result {
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                    case .finished: return
-                    }
-                },
-                receiveValue: { [unowned self] manifest in
-                    self.routeToPhotosView = true
-                    self.manifest = manifest.photoManifest
-                }
-            )
-            .store(in: &cancellable)
+//        $selectedRover
+//            .dropFirst()
+//            .setFailureType(to: APIError.self)
+//            .flatMap { [unowned self] (rover: Rover) -> AnyPublisher<ManifestsApiResponse, APIError> in
+//                return self.getManifest(for: rover)
+//            }
+//            .sink(
+//                receiveCompletion: { result in
+//                    switch result {
+//                    case .failure(let error):
+//                        print(error.localizedDescription)
+//                    case .finished: return
+//                    }
+//                },
+//                receiveValue: { [unowned self] manifest in
+//                    self.routeToPhotosView = true
+//                    self.manifest = manifest.photoManifest
+//                }
+//            )
+//            .store(in: &cancellable)
     }
 }
