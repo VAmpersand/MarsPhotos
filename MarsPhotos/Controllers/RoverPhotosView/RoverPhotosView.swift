@@ -159,31 +159,36 @@ struct ManifestInfoView: View {
     var body: some View {
         HStack {
             Spacer()
-            infoView(for: 2452, title: "Day")
+            InfoView(value: 2452, title: "Day")
             Spacer()
-            infoView(for: 1234, title: "Sol")
+            InfoView(value: 1234, title: "Sol")
             Spacer()
-            infoView(for: 14233, title: "Photos")
+            InfoView(value: 14233, title: "Photos")
             Spacer()
         }
     }
     
-    @ViewBuilder
-    func infoView(for value: Int, title: String) -> some View {
-        VStack {
-            Text("\(value)")
-                .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 24))
-                .foregroundColor(.white)
-            
-            Text(title)
-                .font(Font.custom(Fonts.pingFang.rawValue, fixedSize: 16))
-                .fontWeight(.light)
-                .foregroundColor(.white)
+    // MARK: - InfoView
+    struct InfoView: View {
+        
+        var value: Int
+        var title: String
+        
+        var body: some View {
+            VStack {
+                Text("\(value)")
+                    .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 24))
+                    .foregroundColor(.white)
+                
+                Text(title)
+                    .font(Font.custom(Fonts.pingFang.rawValue, fixedSize: 16))
+                    .fontWeight(.light)
+                    .foregroundColor(.white)
+            }
+            .shadow(color: .black, radius: 5, x: 3, y: 3)
         }
-        .shadow(color: .black, radius: 5, x: 3, y: 3)
     }
 }
-
 
 // MARK: - PhotosView
 struct PhotosView: View {
@@ -204,7 +209,7 @@ struct PhotosView: View {
                 HStack(alignment: .top) {
                     VStack() {
                         ForEach((0..<viewModel.leftColumnPhotos.count), id: \.self) { index in
-                            photoView(photo: viewModel.leftColumnPhotos[index])
+                            PhotoView(photo: viewModel.leftColumnPhotos[index])
                         }
                     }
                     .frame(width: colomnWidth, alignment: .top)
@@ -214,7 +219,7 @@ struct PhotosView: View {
                     
                     VStack {
                         ForEach((0..<viewModel.rightColumnPhotos.count), id: \.self) { index in
-                            photoView(photo: viewModel.rightColumnPhotos[index])
+                            PhotoView(photo: viewModel.rightColumnPhotos[index])
                         }
                     }
                     .frame(width: colomnWidth, alignment: .top)
@@ -247,41 +252,39 @@ struct PhotosView: View {
         .contentShape(20, corners: [.topLeft, .topRight])
     }
     
-    @ViewBuilder
-    func photoView(photo: Photo) -> some View {
-        VStack {
-            KFImage(URL(string: photo.imgSrc))
-                .loadDiskFileSynchronously()
-                .cacheMemoryOnly()
-                .fade(duration: 1)
-                .resizable()
-                .scaledToFit()
-                .cornerRadius(4)
+    // MARK: - PhotoView
+    struct PhotoView: View {
+        
+        var photo: Photo
+        
+        var body: some View {
+            VStack {
+                KFImage(URL(string: photo.imgSrc))
+                    .loadDiskFileSynchronously()
+                    .cacheMemoryOnly()
+                    .fade(duration: 1)
+                    .resizable()
+                    .scaledToFit()
+                    .cornerRadius(4)
+                
+                Spacer()
+                    .frame(height: 20)
+            }
+        }
+    }
+    
+    // MARK: - ViewFrameKey
+    struct ViewFrameKey: PreferenceKey {
+        typealias Value = CGRect
+        
+        static var defaultValue = CGRect(x: 0, y: 0, width: 0, height: 0)
+        static func reduce(value: inout Value, nextValue: () -> Value)  {
+            let rectOffsetX = value.origin.x + nextValue().origin.x
+            let rectOffsetY = value.origin.y + nextValue().origin.y
+            let rectWidth = value.width + nextValue().width
+            let rectHeight = value.height + nextValue().height
             
-            Spacer()
-                .frame(height: 20)
+            value = CGRect(rectOffsetX, rectOffsetY, rectWidth, rectHeight)
         }
     }
 }
-
-// MARK: - ViewFrameKey
-struct ViewFrameKey: PreferenceKey {
-    typealias Value = CGRect
-    
-    static var defaultValue = CGRect(x: 0, y: 0, width: 0, height: 0)
-    static func reduce(value: inout Value, nextValue: () -> Value)  {
-        let rectOffsetX = value.origin.x + nextValue().origin.x
-        let rectOffsetY = value.origin.y + nextValue().origin.y
-        let rectWidth = value.width + nextValue().width
-        let rectHeight = value.height + nextValue().height
-        
-        value = CGRect(rectOffsetX, rectOffsetY, rectWidth, rectHeight)
-    }
-}
-
-//// MARK: - RoverPhotosView_Previewer
-//struct RoverPhotosView_Previewer: PreviewProvider {
-//    static var previews: some View {
-//        RoverPhotosView()
-//    }
-//}

@@ -64,7 +64,8 @@ struct RoverSelectionView: View {
                 VStack {
                     Spacer()
                     
-                    NavigationLink(destination: photosView, isActive: $viewModel.routeToPhotosView) {}
+                    NavigationLink(destination: PhotosView(rover: viewModel.selectedRover),
+                                   isActive: $viewModel.routeToPhotosView) {}
                     Button {
                         self.viewModel.selectedRover = selectedRover
                         viewModel.routeToPhotosView = true
@@ -88,13 +89,18 @@ struct RoverSelectionView: View {
         }
     }
 
-    @ViewBuilder
-    var photosView: some View {
-        let viewModel = RoverPhotoViewModel(rover: viewModel.selectedRover)
-        RoverPhotosView(viewModel: viewModel)
-            .navigationBarBackButtonHidden(true)
-            .navigationBarHidden(true)
-            .navigationBarTitleDisplayMode(.inline)
+    // MARK: - PhotosView
+    struct PhotosView: View {
+        
+        var rover: Rover
+        
+        var body: some View {
+            let viewModel = RoverPhotoViewModel(rover: rover)
+            RoverPhotosView(viewModel: viewModel)
+                .navigationBarBackButtonHidden(true)
+                .navigationBarHidden(true)
+                .navigationBarTitleDisplayMode(.inline)
+        }
     }
 }
 
@@ -181,10 +187,3 @@ struct ClipAnimatedShape: ViewModifier {
         }
     }
 }
-
-//// MARK: - RoverSelectionView_Previewer
-//struct RoverSelectionView_Previewer: PreviewProvider {
-//    static var previews: some View {
-//        RoverSelectionView()
-//    }
-//}

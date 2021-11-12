@@ -8,19 +8,19 @@
 import SwiftUI
 import Combine
 
-final class RoverSelectionViewModel: ObservableObject, NasaAPIService {
-    var apiSession: APIService
+final class RoverSelectionViewModel: ObservableObject {
     
-    init(apiSession: APIService = APISession()) {
-        self.apiSession = apiSession
-
+    init() {
         subscribe()
+    }
+    
+    deinit {
+        cancellable.removeAll()
     }
     
     var cancellable: Set<AnyCancellable> = []
 
     @Published var selectedRover: Rover = .opportunity
-    @Published var manifest: Manifest?
     @Published var routeToPhotosView = false
 }
 

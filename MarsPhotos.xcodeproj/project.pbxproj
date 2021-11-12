@@ -142,7 +142,7 @@
 		775668C12722D459009EBD42 /* RoverSelectionView */ = {
 			isa = PBXGroup;
 			children = (
-				775668E227282F51009EBD42 /* Views */,
+				775668D327243565009EBD42 /* Shapes */,
 				775668C42722D4B8009EBD42 /* ViewModel */,
 				775668C22722D4B3009EBD42 /* RoverSelectionView.swift */,
 			);
@@ -208,14 +208,6 @@
 				777C414B2733F0400031FF43 /* View + extensions.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		775668E227282F51009EBD42 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				775668D327243565009EBD42 /* Shapes */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		77586BD5272AA35D00C0564C /* Fonts */ = {
