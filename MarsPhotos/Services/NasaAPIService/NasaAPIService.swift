@@ -12,8 +12,8 @@ protocol NasaAPIService {
     var apiSession: APIService {get}
     
     func getManifest(for rover: Rover) -> AnyPublisher<ManifestsApiResponse, APIError>
-    func getPhoto(for date: Date, from rover: Rover) -> AnyPublisher<PhotosApiResponse, APIError>
-    func getPhoto(for sol: Int, from rover: Rover) -> AnyPublisher<PhotosApiResponse, APIError>
+    func getPhoto(for date: Date, from rover: Rover, page: Int) -> AnyPublisher<PhotosApiResponse, APIError>
+    func getPhoto(for sol: Int, from rover: Rover, page: Int) -> AnyPublisher<PhotosApiResponse, APIError>
 }
 
 extension NasaAPIService {
@@ -22,13 +22,13 @@ extension NasaAPIService {
             .eraseToAnyPublisher()
     }
     
-    func getPhoto(for date: Date, from rover: Rover) -> AnyPublisher<PhotosApiResponse, APIError> {
-        return apiSession.request(with: NasaAPIEndpoint.photoForDate(date, rover: rover))
+    func getPhoto(for date: Date, from rover: Rover, page: Int) -> AnyPublisher<PhotosApiResponse, APIError> {
+        return apiSession.request(with: NasaAPIEndpoint.photoForDate(date, rover: rover, page: page))
             .eraseToAnyPublisher()
     }
     
-    func getPhoto(for sol: Int, from rover: Rover) -> AnyPublisher<PhotosApiResponse, APIError> {
-        return apiSession.request(with: NasaAPIEndpoint.photoForSol(sol, rover: rover))
+    func getPhoto(for sol: Int, from rover: Rover, page: Int) -> AnyPublisher<PhotosApiResponse, APIError> {
+        return apiSession.request(with: NasaAPIEndpoint.photoForSol(sol, rover: rover, page: page))
             .eraseToAnyPublisher()
     }
 }

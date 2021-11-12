@@ -24,13 +24,13 @@ struct RoverPhotosView: View {
                 GeometryReader { proxy in
                     let frame = proxy.frame(in: .global)
                     
-                    Image(Images.getBg(for: viewModel.selectedRover))
+                    Image(Images.getBg(for: viewModel.rover))
                         .resizable()
                         .resizedToFill()
                         .frame(frame.width, frame.height)
                     
                     HStack(alignment: .top) {
-                        RoverTitleView(rover: viewModel.selectedRover, frame: frame)
+                        RoverTitleView(rover: viewModel.rover, frame: frame)
                         
                         Button {
                             self.presentationMode.wrappedValue.dismiss()
@@ -54,8 +54,9 @@ struct RoverPhotosView: View {
                         
                         GeometryReader { proxy in
                             let height = proxy.frame(in: .global).height
+                            let minHeight: CGFloat = 100
+                            let midHeight = height - 240
                             let maxHeight = height - 120
-                            let midHeight = maxHeight - 220
                             
                             ManifestInfoView(manifest: viewModel.manifest)
                                 .yOffset(height - 190)
@@ -63,8 +64,11 @@ struct RoverPhotosView: View {
                                           ? (-offset <= (midHeight) ? offset : -(midHeight))
                                           : 0)
                             
-                            PhotosView(leftColumn: viewModel.leftColumnPhotos, rightColumn: viewModel.rightColumnPhotos)
-                                .yOffset(height - 100)
+                            PhotosView(viewModel: self.viewModel,
+                                       height: minHeight - (-offset > 0
+                                                             ? (-offset < maxHeight ? offset : -maxHeight)
+                                                             : 0))
+                                .yOffset(height - minHeight)
                                 .yOffset(-offset > 0
                                           ? (-offset < maxHeight ? offset : -maxHeight)
                                           : 0)
@@ -79,7 +83,7 @@ struct RoverPhotosView: View {
                                         })
                                         .onEnded { value in
                                             withAnimation {
-                                                if -offset > 100 && -offset < midHeight {
+                                                if -offset > minHeight && -offset < midHeight {
                                                     offset = -midHeight
                                                     
                                                 } else if -offset > midHeight {
@@ -184,8 +188,8 @@ struct ManifestInfoView: View {
 // MARK: - PhotosView
 struct PhotosView: View {
     
-    var leftColumn: [Photo]
-    var rightColumn: [Photo]
+    @ObservedObject var viewModel: RoverPhotoViewModel
+    var height: CGFloat
     
     var body: some View {
         VStack {
@@ -199,8 +203,8 @@ struct PhotosView: View {
                 
                 HStack(alignment: .top) {
                     VStack() {
-                        ForEach((0..<leftColumn.count), id: \.self) { index in
-                            photoView(photo: leftColumn[index])
+                        ForEach((0..<viewModel.leftColumnPhotos.count), id: \.self) { index in
+                            photoView(photo: viewModel.leftColumnPhotos[index])
                         }
                     }
                     .frame(width: colomnWidth, alignment: .top)
@@ -209,17 +213,33 @@ struct PhotosView: View {
                         .frame(width: 20)
                     
                     VStack {
-                        ForEach((0..<rightColumn.count), id: \.self) { index in
-                            photoView(photo: rightColumn[index])
+                        ForEach((0..<viewModel.rightColumnPhotos.count), id: \.self) { index in
+                            photoView(photo: viewModel.rightColumnPhotos[index])
                         }
                     }
                     .frame(width: colomnWidth, alignment: .top)
                 }
-                
+                .background(
+                    GeometryReader { proxy in
+                        Color.clear.preference(key: ViewFrameKey.self,
+                                               value: proxy.frame(in: .named("scroll")))
+                    }
+                )
+                .onPreferenceChange(ViewFrameKey.self) { frame in
+
+                    print(viewModel.inLoading, frame.height, frame.height + frame.origin.y)
+                    if !viewModel.inLoading, frame.height != 0, frame.height + frame.origin.y < self.height {
+                        viewModel.loadMorePhoto = ()
+                        print("viewModel.loadMorePhoto = ()")
+                    }
+                }
             }
-            .frame(UIScreen.screenWidth - 20, .infinity)
+            .frame(UIScreen.screenWidth - 20, height - 28)
             .padding(.horizontal)
             .clipped()
+            .coordinateSpace(name: "scroll")
+            
+            Spacer()
         }
         .frame(UIScreen.screenWidth, UIScreen.screenHeight - 60)
         .background(Color.white)
@@ -241,6 +261,21 @@ struct PhotosView: View {
             Spacer()
                 .frame(height: 20)
         }
+    }
+}
+
+// MARK: - ViewFrameKey
+struct ViewFrameKey: PreferenceKey {
+    typealias Value = CGRect
+    
+    static var defaultValue = CGRect(x: 0, y: 0, width: 0, height: 0)
+    static func reduce(value: inout Value, nextValue: () -> Value)  {
+        let rectOffsetX = value.origin.x + nextValue().origin.x
+        let rectOffsetY = value.origin.y + nextValue().origin.y
+        let rectWidth = value.width + nextValue().width
+        let rectHeight = value.height + nextValue().height
+        
+        value = CGRect(rectOffsetX, rectOffsetY, rectWidth, rectHeight)
     }
 }
 

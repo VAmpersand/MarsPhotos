@@ -90,7 +90,7 @@ struct RoverSelectionView: View {
 
     @ViewBuilder
     var photosView: some View {
-        let viewModel = RoverPhotoViewModel(selectedRover: viewModel.selectedRover)
+        let viewModel = RoverPhotoViewModel(rover: viewModel.selectedRover)
         RoverPhotosView(viewModel: viewModel)
             .navigationBarBackButtonHidden(true)
             .navigationBarHidden(true)
