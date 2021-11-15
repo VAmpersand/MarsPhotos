@@ -21,7 +21,9 @@ final class RoverSelectionViewModel: ObservableObject {
     var cancellable: Set<AnyCancellable> = []
 
     @Published var selectedRover: Rover = .opportunity
+    @Published var routeToSafariView = false
     @Published var routeToPhotosView = false
+    @Published var routeToPhotosByDateView = false
 }
 
 extension RoverSelectionViewModel {

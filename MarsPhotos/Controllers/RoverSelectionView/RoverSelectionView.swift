@@ -10,12 +10,7 @@ import PureSwiftUI
 
 // MARK: - RoverSelectionView
 struct RoverSelectionView: View {
-    
     @ObservedObject var viewModel = RoverSelectionViewModel()
-    
-    @State private var selectedRover: Rover = .opportunity
-    @State private var showSafari = false
-    @State private var showPhotos = false
     
     var body: some View {
         NavigationView {
@@ -28,12 +23,13 @@ struct RoverSelectionView: View {
                                     .resizable()
                                     .scaledToFill()
                                     .frame(UIScreen.screenWidth, UIScreen.screenWidth * 1.255, .trailing)
-                                    .modifier(ClipAnimatedShape(rover: rover, selectedRover: selectedRover))
+                                    .modifier(ClipAnimatedShape(rover: rover, selectedRover: viewModel.selectedRover))
                                     .onTapGesture {
-                                        withAnimation { selectedRover = rover }
+                                        withAnimation { viewModel.selectedRover = rover }
                                     }
                             }
-                        }.padding(.top, 10)
+                        }
+                        .padding(.top, 10)
                         
                         Text(Strings.fetchPhotoTitle.uppercased())
                             .padding(.horizontal, Constants.offset)
@@ -42,13 +38,13 @@ struct RoverSelectionView: View {
                             .frame(UIScreen.screenWidth, .infinity, .leading)
                             .foregroundColor(Color.init(hex: Colors.titleGray.rawValue))
                         
-                        TabView(selection: $selectedRover.animation(.linear(duration: 0.15))) {
+                        TabView(selection: $viewModel.selectedRover.animation(.linear(duration: 0.15))) {
                             ForEach(Rover.allCases, id: \.self) { rover in
                                 RoverInfoView(rover: rover)
                                     .onTapGesture {
-                                        self.showSafari = true
+                                        self.viewModel.routeToSafariView = true
                                     }
-                                    .sheet(isPresented: $showSafari) {
+                                    .sheet(isPresented: $viewModel.routeToSafariView) {
                                         SafariView(url: Constants.getOficialSiteURL(for: rover))
                                     }
                             }
@@ -57,31 +53,58 @@ struct RoverSelectionView: View {
                         .frame(UIScreen.screenWidth, 250, .leading)
                         
                         Spacer()
-                            .frame(height: 100)
+                            .height(100)
                     }
                 }
                 
                 VStack {
                     Spacer()
                     
-                    NavigationLink(destination: PhotosView(rover: viewModel.selectedRover),
-                                   isActive: $viewModel.routeToPhotosView) {}
-                    Button {
-                        self.viewModel.selectedRover = selectedRover
-                        viewModel.routeToPhotosView = true
-                    } label: {
-                        Text(Strings.fetchLabel)
-                            .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 15))
-                            .frame(UIScreen.screenWidth - 100, .infinity)
-                            .foregroundColor(Color.white)
-                            .padding()
+                    HStack(spacing: 20) {
+                        Button {
+                            viewModel.routeToPhotosView = true
+                        } label: {
+                            NavigationLink(destination: PhotosView(rover: viewModel.selectedRover),
+                                           isActive: $viewModel.routeToPhotosView) {}
+                                           .width(0)
+                            
+                            Text(Strings.fetchLabel)
+                                .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 15))
+                                .frame(UIScreen.screenWidth - 200, .infinity)
+                                .foregroundColor(Color.white)
+                                .padding()
+                        }
+                        .background(Color.blue)
+                        .frame(.infinity, 50)
+                        .clipCapsule()
+                        
+//                        Spacer()
+//                            .width(20)
+        
+                        Button {
+                            viewModel.routeToPhotosByDateView = true
+                        } label: {
+                            NavigationLink(destination: Text("Photo by date"),
+                                           isActive: $viewModel.routeToPhotosByDateView) {}
+                                           .width(0)
+                            
+                            Image(systemName: "calendar")
+                                .renderingMode(.template)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(20)
+                                .foregroundColor(.white)
+                                .padding(.vertical)
+                                .padding(.horizontal, 25)
+                        }
+                        .background(Color.blue)
+                        .frame(.infinity, 50)
+                        .clipCapsule()
                     }
-                    .background(Color.blue)
-                    .frame(.infinity, 50, .bottom)
-                    .clipCapsule()
                     .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: -3)
-                    .padding(.horizontal, 50)
+                    .padding(.horizontal, 20)
                     .padding(.bottom, 30)
+
                 }
             }
             .ignoresSafeArea()
@@ -91,7 +114,6 @@ struct RoverSelectionView: View {
 
     // MARK: - PhotosView
     struct PhotosView: View {
-        
         var rover: Rover
         
         var body: some View {
@@ -153,7 +175,6 @@ struct RoverInfoView: View {
 
 // MARK: - ClipAnimatedShape
 struct ClipAnimatedShape: ViewModifier {
-    
     var rover: Rover
     var selectedRover: Rover
     

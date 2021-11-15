@@ -11,7 +11,6 @@ import Kingfisher
 
 // MARK: - RoverPhotosView
 struct RoverPhotosView: View {
-    
     @ObservedObject var viewModel: RoverPhotoViewModel
     @State var offset: CGFloat = 0
     @State var lastOffset: CGFloat = 0
@@ -50,7 +49,7 @@ struct RoverPhotosView: View {
                     
                     VStack {
                         Spacer()
-                            .frame(height: 80)
+                            .height(80)
                         
                         GeometryReader { proxy in
                             let height = proxy.frame(in: .global).height
@@ -59,7 +58,7 @@ struct RoverPhotosView: View {
                             let maxHeight = height - 120
                             
                             ManifestInfoView(manifest: viewModel.manifest)
-                                .yOffset(height - 190)
+                                .yOffset(height - 175)
                                 .yOffset(-offset > 0
                                           ? (-offset <= (midHeight) ? offset : -(midHeight))
                                           : 0)
@@ -128,7 +127,6 @@ struct RoverPhotosView: View {
 
 //MARK: - RoverTitleView
 struct RoverTitleView: View {
-    
     var rover: Rover
     var frame: CGRect
     
@@ -153,7 +151,6 @@ struct RoverTitleView: View {
 
 // MARK: - ManifestInfoView
 struct ManifestInfoView: View {
-    
     var manifest: Manifest?
     
     var body: some View {
@@ -170,7 +167,6 @@ struct ManifestInfoView: View {
     
     // MARK: - InfoView
     struct InfoView: View {
-        
         var value: Int
         var title: String
         
@@ -192,7 +188,6 @@ struct ManifestInfoView: View {
 
 // MARK: - PhotosView
 struct PhotosView: View {
-    
     @ObservedObject var viewModel: RoverPhotoViewModel
     var height: CGFloat
     
@@ -204,39 +199,45 @@ struct PhotosView: View {
                 .padding(.vertical, 11)
             
             ScrollView(showsIndicators: false) {
-                let colomnWidth = (UIScreen.screenWidth - 60) / 2
-                
-                HStack(alignment: .top) {
-                    VStack() {
-                        ForEach((0..<viewModel.leftColumnPhotos.count), id: \.self) { index in
-                            PhotoView(photo: viewModel.leftColumnPhotos[index])
+                VStack {
+                    HStack(alignment: .top) {
+                        let colomnWidth = (UIScreen.screenWidth - 60) / 2
+                        
+                        VStack() {
+                            ForEach((0..<viewModel.leftColumnPhotos.count), id: \.self) { index in
+                                PhotoView(photo: viewModel.leftColumnPhotos[index])
+                            }
+                        }
+                        .frame(width: colomnWidth, alignment: .top)
+                        
+                        Spacer()
+                            .width(20)
+                        
+                        VStack {
+                            ForEach((0..<viewModel.rightColumnPhotos.count), id: \.self) { index in
+                                PhotoView(photo: viewModel.rightColumnPhotos[index])
+                            }
+                        }
+                        .frame(width: colomnWidth, alignment: .top)
+                    }
+                    .background(
+                        GeometryReader { proxy in
+                            Color.clear.preference(key: ViewFrameKey.self,
+                                                   value: proxy.frame(in: .named("scroll")))
+                        }
+                    )
+                    .onPreferenceChange(ViewFrameKey.self) { frame in
+                        if !viewModel.inLoading,
+                            frame.height != 0,
+                            frame.height + frame.origin.y < height {
+                            viewModel.loadMorePhoto = ()
                         }
                     }
-                    .frame(width: colomnWidth, alignment: .top)
                     
                     Spacer()
-                        .frame(width: 20)
-                    
-                    VStack {
-                        ForEach((0..<viewModel.rightColumnPhotos.count), id: \.self) { index in
-                            PhotoView(photo: viewModel.rightColumnPhotos[index])
-                        }
-                    }
-                    .frame(width: colomnWidth, alignment: .top)
-                }
-                .background(
-                    GeometryReader { proxy in
-                        Color.clear.preference(key: ViewFrameKey.self,
-                                               value: proxy.frame(in: .named("scroll")))
-                    }
-                )
-                .onPreferenceChange(ViewFrameKey.self) { frame in
-
-                    print(viewModel.inLoading, frame.height, frame.height + frame.origin.y)
-                    if !viewModel.inLoading, frame.height != 0, frame.height + frame.origin.y < self.height {
-                        viewModel.loadMorePhoto = ()
-                        print("viewModel.loadMorePhoto = ()")
-                    }
+                        .height(20)
+                
+                    LoaderView()
                 }
             }
             .frame(UIScreen.screenWidth - 20, height - 28)
@@ -254,12 +255,16 @@ struct PhotosView: View {
     
     // MARK: - PhotoView
     struct PhotoView: View {
-        
         var photo: Photo
         
         var body: some View {
             VStack {
                 KFImage(URL(string: photo.imgSrc))
+//                    .placeholder {
+//                        Rectangle()
+//                            .fill(.gray)
+//                            .frame(width: .infinity, height: .infinity)
+//                    }
                     .loadDiskFileSynchronously()
                     .cacheMemoryOnly()
                     .fade(duration: 1)
@@ -268,7 +273,7 @@ struct PhotosView: View {
                     .cornerRadius(4)
                 
                 Spacer()
-                    .frame(height: 20)
+                    .height(20)
             }
         }
     }
@@ -286,5 +291,40 @@ struct PhotosView: View {
             
             value = CGRect(rectOffsetX, rectOffsetY, rectWidth, rectHeight)
         }
+    }
+}
+
+// MARK: - LoaderView
+struct LoaderView: View {
+   @State var angle = 0.0
+    
+    var body: some View {
+        HStack {
+            Image(systemName: "hourglass")
+                .renderingMode(.template)
+                .resizable()
+                .scaledToFill()
+                .frame(20)
+                .foregroundColor(Color(hex: Colors.titleGray.rawValue))
+//                .rotate(.degrees(angle))
+//                .animation(
+//                    Animation
+//                        .linear(duration: 0.5)
+//                        .delay(0)
+//                        .repeatForever()
+//                )
+//                .onAppear {
+//                    angle += 360
+//                }
+            
+            Spacer()
+                .width(10)
+            
+            Text(Strings.waitLabel)
+                .font(Font.custom(Fonts.latoHeavy.rawValue, fixedSize: 17))
+                .foregroundColor(Color(hex: Colors.titleGray.rawValue))
+                .padding()
+        }
+        .padding()
     }
 }

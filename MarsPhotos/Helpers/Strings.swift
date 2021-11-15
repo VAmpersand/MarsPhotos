@@ -13,7 +13,8 @@ struct Strings {
     static let roverTitle = "Nasa Mars rover"
     
     static let moreLabel = "More"
-    static let fetchLabel = "Fetch"
+    static let fetchLabel = "Fetch all"
+    static let waitLabel = "Please wait..."
     
     static func getMissionInfo(for rover: Rover) -> String {
         switch rover {
