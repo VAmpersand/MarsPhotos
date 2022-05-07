@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		772FF9B42735083E006E3AAE /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 772FF9B32735083E006E3AAE /* PureSwiftUI */; };
-		772FF9B7273542BD006E3AAE /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 772FF9B6273542BD006E3AAE /* Kingfisher */; };
 		775668B32722D1C2009EBD42 /* MarsPhotosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775668B22722D1C2009EBD42 /* MarsPhotosApp.swift */; };
 		775668B72722D1C5009EBD42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 775668B62722D1C5009EBD42 /* Assets.xcassets */; };
 		775668BA2722D1C5009EBD42 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 775668B92722D1C5009EBD42 /* Preview Assets.xcassets */; };
@@ -39,6 +37,8 @@
 		777C41432733908F0031FF43 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C41422733908F0031FF43 /* Images.swift */; };
 		777C414C2733F0400031FF43 /* View + extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C414B2733F0400031FF43 /* View + extensions.swift */; };
 		777C414F2733F11E0031FF43 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777C414E2733F11E0031FF43 /* Shapes.swift */; };
+		779C9C0B28253ECB003C22D0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 779C9C0A28253ECB003C22D0 /* Kingfisher */; };
+		779C9C0E28253F01003C22D0 /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 779C9C0D28253F01003C22D0 /* PureSwiftUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,8 +82,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				772FF9B7273542BD006E3AAE /* Kingfisher in Frameworks */,
-				772FF9B42735083E006E3AAE /* PureSwiftUI in Frameworks */,
+				779C9C0E28253F01003C22D0 /* PureSwiftUI in Frameworks */,
+				779C9C0B28253ECB003C22D0 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,8 +298,8 @@
 			);
 			name = MarsPhotos;
 			packageProductDependencies = (
-				772FF9B32735083E006E3AAE /* PureSwiftUI */,
-				772FF9B6273542BD006E3AAE /* Kingfisher */,
+				779C9C0A28253ECB003C22D0 /* Kingfisher */,
+				779C9C0D28253F01003C22D0 /* PureSwiftUI */,
 			);
 			productName = MarsPhotos;
 			productReference = 775668AF2722D1C1009EBD42 /* MarsPhotos.app */;
@@ -330,8 +330,8 @@
 			);
 			mainGroup = 775668A62722D1C1009EBD42;
 			packageReferences = (
-				772FF9B22735083E006E3AAE /* XCRemoteSwiftPackageReference "pure-swift-ui" */,
-				772FF9B5273542BD006E3AAE /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				779C9C0928253ECB003C22D0 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				779C9C0C28253F01003C22D0 /* XCRemoteSwiftPackageReference "pure-swift-ui" */,
 			);
 			productRefGroup = 775668B02722D1C1009EBD42 /* Products */;
 			projectDirPath = "";
@@ -597,7 +597,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		772FF9B22735083E006E3AAE /* XCRemoteSwiftPackageReference "pure-swift-ui" */ = {
+		779C9C0928253ECB003C22D0 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		779C9C0C28253F01003C22D0 /* XCRemoteSwiftPackageReference "pure-swift-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/CodeSlicing/pure-swift-ui.git";
 			requirement = {
@@ -605,26 +613,18 @@
 				kind = branch;
 			};
 		};
-		772FF9B5273542BD006E3AAE /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		772FF9B32735083E006E3AAE /* PureSwiftUI */ = {
+		779C9C0A28253ECB003C22D0 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 772FF9B22735083E006E3AAE /* XCRemoteSwiftPackageReference "pure-swift-ui" */;
-			productName = PureSwiftUI;
-		};
-		772FF9B6273542BD006E3AAE /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 772FF9B5273542BD006E3AAE /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			package = 779C9C0928253ECB003C22D0 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		779C9C0D28253F01003C22D0 /* PureSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 779C9C0C28253F01003C22D0 /* XCRemoteSwiftPackageReference "pure-swift-ui" */;
+			productName = PureSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
