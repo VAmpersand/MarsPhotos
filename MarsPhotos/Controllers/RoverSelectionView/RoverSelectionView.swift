@@ -22,13 +22,14 @@ struct RoverSelectionView: View {
                                 Image(Images.getShapesBg(for: rover))
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(UIScreen.screenWidth, UIScreen.screenWidth * 1.255, .trailing)
+
                                     .modifier(ClipAnimatedShape(rover: rover, selectedRover: viewModel.selectedRover))
                                     .onTapGesture {
                                         withAnimation { viewModel.selectedRover = rover }
                                     }
                             }
                         }
+                        .frame(UIScreen.screenWidth, UIScreen.screenWidth * 1.255, .trailing)
                         .padding(.top, 10)
                         
                         Text(Strings.fetchPhotoTitle.uppercased())
