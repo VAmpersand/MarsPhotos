@@ -133,7 +133,7 @@ extension RoverPhotoViewModel {
 private extension RoverPhotoViewModel {
     func loadPhoto(by photo: Photo) {
         if let url = URL(string: photo.imgSrc) {
-            let resource = ImageResource(downloadURL: url, cacheKey: photo.imgSrc)
+            let resource = KF.ImageResource(downloadURL: url, cacheKey: photo.imgSrc)
             
             KingfisherManager.shared.retrieveImage(with: resource) { [weak self] result in
                 guard let self = self else { return }
